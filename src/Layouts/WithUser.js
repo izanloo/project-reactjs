@@ -3,11 +3,15 @@ import Header from '../Components/Header'
 import Sidebar from '../Components/Sidebar'
 
 function WithUser(Component) {
+    const pathCurrent = window.location
+    const pathCategory = '/Category'
     return function UserLayout({ ...props }) {
         return (
             <>
                 <div><Header /></div>
-            
+                <div>
+                    {pathCurrent.pathname === pathCategory ? <Sidebar /> : null}
+                </div>
                 <Component {...props} />
             </>
         )
