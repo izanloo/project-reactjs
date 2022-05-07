@@ -1,7 +1,10 @@
 import React from 'react'
+import WithAdmin from '../Layouts/WithAdmin'
 
-export default function Product() {
+
+function Product() {
   return (
     <div>Productttt</div>
   )
 }
+export default WithAdmin(Product)

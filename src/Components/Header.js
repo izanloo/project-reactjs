@@ -5,17 +5,15 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-// import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import { BiCart, BiMenu } from "react-icons/bi";
 import logo from '../Assest/Images/logo.png'
 import { Link } from 'react-router-dom';
 
 
-const pages = ['سبدخرید', 'مدیریت'];
+const pages = ['مدیریت', 'سبدخرید'];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -45,8 +43,8 @@ const ResponsiveAppBar = () => {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              {/* <MenuIcon /> */}
-              menue
+
+              <BiMenu />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -63,32 +61,37 @@ const ResponsiveAppBar = () => {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block',sm:'none', md: 'none' },
+                display: { xs: 'block', sm: 'none', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center" >{page}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleCloseNavMenu} style={{display:'block'}}>
+                <Typography textAlign="center"  >
+                  <Link to='/login'  >{pages[0]}</Link>
+                </Typography>
+                <Typography textAlign="center" >
+                  <Link to='/cart'  ><BiCart />{pages[1]}</Link>
+                </Typography>
+
+              </MenuItem>
             </Menu>
           </Box>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex' } }}>
-              <Box
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-            <Link to='/cart'  style={{ paddingLeft: 13 }} >{pages[0]}</Link>
-            <Link to='/login' style={{ paddingLeft: 13 }} >{pages[1]}</Link>
-              </Box>
-           
+            <Box
+              sx={{ my: 2, color: 'white', display: 'block' }}
+            >
+              <Link to='/login' style={{ paddingLeft: 13 }} >{pages[0]}</Link>
+              <Link to='/cart' style={{ paddingLeft: 13 }} ><BiCart />{pages[1]}</Link>
+
+            </Box>
+
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-              <Box display={'flex'} >
-              <Typography  variant="h4" style={{paddingRight:13}} sx={{display:{xs:'none' , sm:'block'}}}>دمنوش های گیاهی</Typography>
+            <Box display={'flex'} >
+              <Typography variant="h6" style={{ paddingRight: 13 }} sx={{ display: { xs: 'none', sm: 'block' } }}>دمنوش های گیاهی</Typography>
               <Link to="/"><Avatar className="logo" alt="logo" title="صفحه اصلی" src={logo} /></Link>
-              </Box>
+            </Box>
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -103,7 +106,7 @@ const ResponsiveAppBar = () => {
                 horizontal: 'right',
               }}
               open={Boolean(anchorElUser)}
-              // onClose={handleCloseUserMenu}
+            // onClose={handleCloseUserMenu}
             >
 
             </Menu>
