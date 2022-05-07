@@ -63,12 +63,12 @@ const ResponsiveAppBar = () => {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' },
+                display: { xs: 'block',sm:'none', md: 'none' },
               }}
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center" >{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -78,16 +78,16 @@ const ResponsiveAppBar = () => {
               <Box
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-            <Link to='/cart'>{pages[0]}</Link>
-            <Link to='/login'>{pages[1]}</Link>
+            <Link to='/cart'  style={{ paddingLeft: 13 }} >{pages[0]}</Link>
+            <Link to='/login' style={{ paddingLeft: 13 }} >{pages[1]}</Link>
               </Box>
            
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-              <Box display={'flex'}>
-              <Typography sx={{display:{xs:'none' , sm:'block'}}}>دمنوش های گیاهی</Typography>
-              <Avatar alt="Remy Sharp" src={logo} />
+              <Box display={'flex'} >
+              <Typography  variant="h4" style={{paddingRight:13}} sx={{display:{xs:'none' , sm:'block'}}}>دمنوش های گیاهی</Typography>
+              <Avatar className="logo" alt="logo" title="صفحه اصلی" src={logo} />
               </Box>
             <Menu
               sx={{ mt: '45px' }}

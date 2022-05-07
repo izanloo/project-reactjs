@@ -1,5 +1,5 @@
 import React from 'react'
-import './Assest/Style/App.css'
+import './Assest/Style/abstracts/css/App.css'
 import AppRouter from './Routes/App.router'
 
 

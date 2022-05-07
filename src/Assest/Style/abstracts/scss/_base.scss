@@ -1,0 +1,19 @@
+// @import "./abstracts/_variables.scss";
+
+body{
+  background-color: #efc;
+  padding:0;  
+  margin:0;
+    // padding: 56px;
+  a{
+    text-decoration: none;
+  }
+}
+.app{
+  background-color: white;
+}
+
+//header component
+.logo{
+  cursor: pointer;
+}

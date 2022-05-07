@@ -1,0 +1,17 @@
+body {
+  background-color: #efc;
+  padding:0;  
+  margin:0;
+}
+body a{
+  text-decoration: none;
+
+}
+
+.app {
+  background-color: white; }
+
+  .logo{
+    cursor: pointer;
+  }
+/*# sourceMappingURL=App.css.map */
