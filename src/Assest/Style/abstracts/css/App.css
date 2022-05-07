@@ -1,7 +1,10 @@
+@import url('http://fonts.cdnfonts.com/css/iranian-sans');
 body {
   background-color: #efc;
   padding:0;  
   margin:0;
+  font-family: 'Iranian Sans', sans-serif !important;
+                                                
 }
 body a{
   text-decoration: none;

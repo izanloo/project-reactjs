@@ -1,10 +1,13 @@
 // @import "./abstracts/_variables.scss";
+@import url('http://fonts.cdnfonts.com/css/iranian-sans');
 
 body{
   background-color: #efc;
   padding:0;  
   margin:0;
     // padding: 56px;
+    font-family: 'Iranian Sans', sans-serif !important;
+                                                
   a{
     text-decoration: none;
   }
