@@ -87,7 +87,7 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 0 }}>
               <Box display={'flex'} >
               <Typography  variant="h4" style={{paddingRight:13}} sx={{display:{xs:'none' , sm:'block'}}}>دمنوش های گیاهی</Typography>
-              <Avatar className="logo" alt="logo" title="صفحه اصلی" src={logo} />
+              <Link to="/"><Avatar className="logo" alt="logo" title="صفحه اصلی" src={logo} /></Link>
               </Box>
             <Menu
               sx={{ mt: '45px' }}
