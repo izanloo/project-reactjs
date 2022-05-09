@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
- import adminReducer from './Reducer'
+ import loginSlice from './LoginSlice'
 
  export const store= configureStore({
   reducer: {
-    admin: adminReducer,
+    dataAdmin: loginSlice,
   },
 })
