@@ -11,18 +11,17 @@ function Login() {
     usernameErr: '',
     passwordErr: ''
   })
-  const [dataAdmin, setAdmin] = useState()
+  const [dataAdmin, setDataAdmin] = useState()
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const url = 'http://localhost:3002/whoami';
 
   const getInfo = () => {
     axios.get(url)
-      .then(res => setAdmin(res.data))
+      .then(res => setDataAdmin(res.data))
       .catch(error => console.log(error))
   }
   useEffect(() => { getInfo() }, [])
-  
   return (
     <div className='login'>
       <h1>ورود به پنل ادمین</h1>
@@ -51,7 +50,7 @@ function Login() {
           }
           else if (values.username == dataAdmin.username && values.password == dataAdmin.password) {
             dispatch(login(true))
-            navigate('/paneladmin/orders', { replace })
+            navigate('/paneladmin/orders', {replace:true})
           }
 
 
