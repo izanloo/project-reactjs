@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export const loginSlice = createSlice({
-  name: 'dataAdmin',
+  name: 'admin',
   initialState: {
     isLogin : false,
   },
@@ -11,5 +11,6 @@ export const loginSlice = createSlice({
     },
   },
 })
+
 export const { login } = loginSlice.actions
 export default loginSlice.reducer
