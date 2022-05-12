@@ -14,33 +14,41 @@ import Orders from '../pages/Orders'
 import Notfound from '../pages/Notfound'
 import ResaultPay from '../pages/ResaultPay'
 import Protected from './Protected.route';
+import WaitingOrder from '../Components/WaitingOrder';
+import Resived from '../pages/Resived';
+import OutletOrder from '../pages/OutletOrder';
+
+import Pagination from '../pages/Pagination'
 
 
 export default function AppRouter() {
   return (
     <>
       <Routes>
-      <Route path='' element={<Home/>} />
-      <Route path='/login' element={<Login/>}/>
-      <Route path='/cart' element={<Cart/>} />
-      {/* edit path (add id selement selected) */}
-      <Route path='/detail' element={<Detail/>} />  
-      <Route path='/category' element={<Category/>}/> 
-      <Route path='/finalbuy' element={<FinallBuy/>}/>
-      <Route path='/payment' element={<Payment/>}/>
-      
-      <Route path='/paneladmin' element={<PanelAdmin/>}/>
-      <Route path='/paneladmin/product' element={<Protected element={<Product/>}/>} />
-      <Route path='/paneladmin/resaultPay' element={<Protected element={<ResaultPay/>}/>} />
-      <Route path='/paneladmin/payment' element={<Protected element={<Payment/>}/>} />
-      <Route path='/paneladmin/orders' element={<Protected element={<Orders/>}/>} />
-      <Route path='/paneladmin/inventory' element={<Protected element={<Inventory/>}/>} />
+        <Route path='' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/cart' element={<Cart />} />
+        <Route path='/detail' element={<Detail />} />
+        <Route path='/category' element={<Category />} />
+        <Route path='/finalbuy' element={<FinallBuy />} />
+        <Route path='/payment' element={<Payment />} />
+        <Route path="/pagination" element={<Pagination/>} />
+
+        <Route path='/paneladmin' element={<PanelAdmin />} />
+        <Route path='/paneladmin/product' element={<Protected element={<Product />} />} />
+        <Route path='/paneladmin/resaultPay' element={<Protected element={<ResaultPay />} />} />
+        <Route path='/paneladmin/payment' element={<Protected element={<Payment />} />} />
+        <Route path='/' element={<OutletOrder/>}>
+          <Route path='/paneladmin/orders' element={<Protected element={<Orders />} />} />
+          <Route path='/paneladmin/orders/resived' element={<Protected element={<Resived />} />} />
+        </Route>
+        <Route path='/paneladmin/inventory' element={<Protected element={<Inventory />} />} />
 
 
 
 
-      <Route path='*' element={<Notfound/>} />
-    </Routes>
+        <Route path='*' element={<Notfound />} />
+      </Routes>
     </>
   )
 }

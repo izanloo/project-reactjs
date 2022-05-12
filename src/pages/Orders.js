@@ -1,9 +1,11 @@
 import React from 'react'
-import WithAdmin from '../Layouts/WithAdmin'
+import WaitingOrder from '../Components/WaitingOrder'
 
- function Orders() {
+function Orders() {
   return (
-    <div>سفارشات</div>
+    <>
+      <WaitingOrder />
+    </>
   )
 }
-export default WithAdmin(Orders)
+export default Orders

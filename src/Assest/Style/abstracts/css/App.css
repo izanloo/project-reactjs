@@ -17,4 +17,13 @@ body a{
   .logo{
     cursor: pointer;
   }
+
+  .login{
+    display:grid;
+    justify-content: center;
+    margin-top:25px;
+  }
+  .productImg{
+    width: 120px;
+  }
 /*# sourceMappingURL=App.css.map */

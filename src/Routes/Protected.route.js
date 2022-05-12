@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { Navigate } from "react-router-dom";
-
+import React, { Children, useEffect, useState } from 'react';
+import { Navigate,useLocation } from "react-router-dom";
+import { useSelector } from 'react-redux'
 function Protected({ element }) {
-    const [islogin, setIslogin] = useState(true)
-    function cheklogin() {
-        // setIslogin(true)
-    }
-
-    return (
-        islogin == true ? element : <Navigate to="/login" replace />
-    );
+    const state = useSelector((state) => {
+        return state.admin.isLogin
+    })
+    console.log(state);
+    const location=useLocation()
+if(!state){
+    return <Navigate to="/login" state={{from:location}}replace />
 }
-
+        
+return (
+    element   
+     )
+}
 export default Protected;

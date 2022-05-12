@@ -13,7 +13,7 @@ import logo from '../Assest/Images/logo.png'
 import { Link } from 'react-router-dom';
 
 
-const pages = ['کالاها', ' موجودی و قیمت', 'سفارشات'];
+const pages = ['کالاها', ' موجودی و قیمت', 'سفارشات','بازگشت به سایت'];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -74,6 +74,8 @@ const ResponsiveAppBar = () => {
                 <Typography textAlign="center" >
                 <Link to={`/paneladmin/orders`}  >{pages[2]}</Link>
                 </Typography>
+                <Link to='/' >{pages[3]}</Link>
+
 
               </MenuItem>
             </Menu>
@@ -86,6 +88,7 @@ const ResponsiveAppBar = () => {
               <Link to={`/paneladmin/product`} style={{ paddingLeft: 13 }} >{pages[0]}</Link>
               <Link to={`/paneladmin/inventory`} style={{ paddingLeft: 13 }} >{pages[1]}</Link>
               <Link to={`/paneladmin/orders`} style={{ paddingLeft: 13 }} >{pages[2]}</Link>
+              <Link to='/' style={{ paddingLeft: 13 }} >{pages[3]}</Link>
             </Box>
 
           </Box>

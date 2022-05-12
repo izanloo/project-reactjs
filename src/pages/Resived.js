@@ -1,31 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux';
-import { setOrder } from '../Redux/orderSlice'
 import { useSelector } from 'react-redux'
-import axios from 'axios'
 
-export default function WaitingOrder() {
+export default function Resived() {
   const order = useSelector((state) => state.order)
-  const dispatch = useDispatch()
-  const url = 'http://localhost:3002/orders';
-
-  function getData() {
-    axios({
-      url: url,
-      method: 'get',
-      params: {
-        token: 'TOP-SECRET'
-      }
-    })
-      .then(function (response) {
-        dispatch(setOrder(response.data))
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-  useEffect(() =>  { getData() }, [])
-
   return (
     <>
         <div>
@@ -38,7 +15,7 @@ export default function WaitingOrder() {
             <th>وضعیت</th>
           </tr>
           {order.order == null ? "kk" : order.order?.map((item, id) => {
-            if (item.orderStatus == 1) {
+            if (item.orderStatus == 2) {
               return (
                 <>
                   <tr>
