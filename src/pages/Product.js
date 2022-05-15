@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react'
 import WithAdmin from '../Layouts/WithAdmin'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import Modal from '../Components/Modal'
+import Todo, {ToDoList} from '../Components/Todo'
 
 function Product() {
-  const [product, setProduct] = useState()
-  const [categroys, setCategorys] = useState()
+  const [product, setProduct] = useState([])
+  const [categroys, setCategorys] = useState([])
   const url = 'http://localhost:3002/products';
 
   useEffect(() => {
@@ -49,9 +51,11 @@ function Product() {
 
   return (
     <>
-      <button ><Link to='' />افزودن کالا</button>
+  
+    <Todo/>
+<Modal/>
       <h2>مدیریت کالاها</h2>
-      {product == null ? "loding" :
+      {product  == null ? "loding" :
         <div>
           <table dir="rtl">
             <tr>

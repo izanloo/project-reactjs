@@ -1,37 +1,30 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { Formik, replace } from 'formik';
-import { useNavigate } from 'react-router';
-import {  useDispatch } from 'react-redux';
+import React, { useState } from 'react'
+import { Formik } from 'formik';
+import { useNavigate, useLocation} from 'react-router';
 import { Link } from 'react-router-dom';
-import { setLogin } from '../Redux/LoginSlice'
+import { login } from '../Redux/LoginSlice'
 import { Loginstyle } from '../Assest/Style/abstracts/Stylecomponent';
 import axios from 'axios'
 import { Box } from '@mui/material';
+import { useSelector,useDispatch } from 'react-redux'
 
 
 function Login() {
-
+  // const state = useSelector((state) => state.admin.isLogin)
+  const Token = "";
+  const Dispatch = useDispatch()
+  const navigate = useNavigate()
+  const location = useLocation()
+   
   const [errorlogin, setErorr] = useState({
     usernameErr: '',
     passwordErr: ''
   })
-  const [dataAdmin, setDataAdmin] = useState()
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const url = 'http://localhost:3002/whoami';
-
-  const getInfo = () => {
-    axios.get(url)
-      .then(res => setDataAdmin(res.data))
-      .catch(error => console.log(error))
-  }
-  useEffect(() => { getInfo() }, [])
-
 
   return (
     <Loginstyle>
       <Formik
-        initialValues={{ name: '' }}
+        initialValues={{username: '', password: '', }}
         validate={values => {
           let errors = {};
           if (!values.username) {
@@ -46,60 +39,59 @@ function Login() {
           return errors;
         }}
         onSubmit={(values) => {
-          if (values.username !== dataAdmin.username) {
-            setErorr({ usernameErr: "نام کاربری وارد شده اشتباه است" })
-          }
-          else if (values.password !== dataAdmin.password) {
-            setErorr({ passwordErr: "پسورد وارد شده اشتباه است" })
-
-          }
-          else if (values.username == dataAdmin.username && values.password == dataAdmin.password) {
-            dispatch(setLogin(true))
-            navigate('/paneladmin/orders', {replace})
-          }
-
-
+          axios
+            .post('http://localhost:3002/auth/login', values)
+            .then((response) => {
+              if (response.status == 200) {
+                Dispatch(login(true))
+                localStorage.setItem(Token, response.data.token)
+                navigate('/paneladmin/orders', { replace:true })
+              }
+            })
+            .catch(() => {
+              alert("کابری وجود ندارد");
+            });
         }}
       >
         {props => (
-          <Box sx={{ pt:'120px', maxWidth: { xs: '100%' } }}>
-          <form onSubmit={props.handleSubmit} >
-            <div className="field">
-              <input
-                type="text"
-                name="username"
-                className='w-100 p-1'
-                placeholder="نام کاربری"
-                onChange={props.handleChange}
-                onBlur={props.handleBlur}
-                value={props.values.email}
-              />
-            </div>
-            <p className="error">
-              {props.errors.username && props.touched.username && props.errors.username}
-            </p>
-            <p>{errorlogin?.usernameErr}</p>
-
-            <div className="field">
-              <input
-                type="password"
-                name="password"
-                placeholder="کلمه عبور"
-                className='w-100 position-relative mt-4 p-1 mb-1'
-                onChange={props.handleChange}
-                onBlur={props.handleBlur}
-                value={props.values.password}
-              />
+          <Box sx={{ pt: '120px', maxWidth: { xs: '100%' } }}>
+            <form onSubmit={props.handleSubmit} >
+              <div className="field">
+                <input
+                  type="text"
+                  name="username"
+                  className='w-100 p-1'
+                  placeholder="نام کاربری"
+                  onChange={props.handleChange}
+                  onBlur={props.handleBlur}
+                  value={props.values.email}
+                />
+              </div>
               <p className="error">
-                {props.errors.password && props.touched.password && props.errors.password}
+                {props.errors.username && props.touched.username && props.errors.username}
               </p>
-              <p>{errorlogin?.passwordErr}</p>
+              <p>{errorlogin?.usernameErr}</p>
 
-            </div>
-            <button type="submit">ورود</button>
-            <Link to='/'>بازگشت به سایت</Link>
+              <div className="field">
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="کلمه عبور"
+                  className='w-100 position-relative mt-4 p-1 mb-1'
+                  onChange={props.handleChange}
+                  onBlur={props.handleBlur}
+                  value={props.values.password}
+                />
+                <p className="error">
+                  {props.errors.password && props.touched.password && props.errors.password}
+                </p>
+                <p>{errorlogin?.passwordErr}</p>
 
-          </form>
+              </div>
+              <button type="submit">ورود</button>
+              <Link to='/'>بازگشت به سایت</Link>
+
+            </form>
 
           </Box>
         )}
