@@ -3,10 +3,14 @@ import { Formik, replace } from 'formik';
 import { useNavigate } from 'react-router';
 import {  useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { login } from '../Redux/LoginSlice'
+import { setLogin } from '../Redux/LoginSlice'
+import { Loginstyle } from '../Assest/Style/abstracts/Stylecomponent';
 import axios from 'axios'
+import { Box } from '@mui/material';
+
 
 function Login() {
+
   const [errorlogin, setErorr] = useState({
     usernameErr: '',
     passwordErr: ''
@@ -22,9 +26,10 @@ function Login() {
       .catch(error => console.log(error))
   }
   useEffect(() => { getInfo() }, [])
+
+
   return (
-    <div className='login'>
-      <h1>ورود به پنل ادمین</h1>
+    <Loginstyle>
       <Formik
         initialValues={{ name: '' }}
         validate={values => {
@@ -49,21 +54,22 @@ function Login() {
 
           }
           else if (values.username == dataAdmin.username && values.password == dataAdmin.password) {
-            dispatch(login(true))
-            navigate('/paneladmin/orders', {replace:true})
+            dispatch(setLogin(true))
+            navigate('/paneladmin/orders', {replace})
           }
 
 
         }}
       >
         {props => (
-          <form onSubmit={props.handleSubmit}>
+          <Box sx={{ pt:'120px', maxWidth: { xs: '100%' } }}>
+          <form onSubmit={props.handleSubmit} >
             <div className="field">
               <input
                 type="text"
                 name="username"
                 className='w-100 p-1'
-                placeholder="پست الکترونیک"
+                placeholder="نام کاربری"
                 onChange={props.handleChange}
                 onBlur={props.handleBlur}
                 value={props.values.email}
@@ -94,9 +100,11 @@ function Login() {
             <Link to='/'>بازگشت به سایت</Link>
 
           </form>
+
+          </Box>
         )}
       </Formik>
-    </div>
+    </Loginstyle>
   )
 }
 export default Login

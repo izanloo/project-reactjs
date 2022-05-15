@@ -5,8 +5,8 @@ body{
   background-color: #efc;
   padding:0;  
   margin:0;
-    // padding: 56px;
     font-family: 'Iranian Sans', sans-serif !important;
+
                                                 
   a{
     text-decoration: none;
@@ -19,6 +19,9 @@ body{
 //header component
 .logo{
   cursor: pointer;
+}
+AppBar{
+  background-color: rgba(0,0,0,.5);
 }
 //login componenet
 .login{

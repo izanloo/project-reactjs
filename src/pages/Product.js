@@ -61,7 +61,6 @@ function Product() {
               <th>لینک</th>
             </tr>
             {product.map((item) => {
-              if (item.category == 1) {
                 return (
                   <tr>
                     <td><img className='productImg' src={item.images} /></td>
@@ -83,8 +82,8 @@ function Product() {
                     })}
                   </tr>
                 )
-              }
-            })}
+          
+          })}
           </table>
 
 

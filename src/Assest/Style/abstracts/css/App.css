@@ -4,15 +4,11 @@ body {
   padding:0;  
   margin:0;
   font-family: 'Iranian Sans', sans-serif !important;
+  direction: rtl;
                                                 
 }
-body a{
-  text-decoration: none;
 
-}
 
-.app {
-  background-color: white; }
 
   .logo{
     cursor: pointer;
@@ -26,4 +22,7 @@ body a{
   .productImg{
     width: 120px;
   }
+ 
+  
+  
 /*# sourceMappingURL=App.css.map */

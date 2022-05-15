@@ -11,30 +11,38 @@ import MenuItem from '@mui/material/MenuItem';
 import { BiCart, BiMenu } from "react-icons/bi";
 import logo from '../Assest/Images/logo.png'
 import { Link } from 'react-router-dom';
+import {Appbar} from '../Assest/Style/abstracts/Stylecomponent'
 
 
 
 const pages = ['مدیریت', 'سبدخرید'];
 
 const ResponsiveAppBar = () => {
+  
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-
-
   return (
-    <AppBar position="static">
+    <Appbar className='AppBar' position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex' } }}>
+            <Box
+              sx={{ my: 2, color: 'white', display: 'block' }}
+            >
+              <Link to='/login' style={{ paddingLeft: 13 }} >{pages[0]}</Link>
+              <Link to='/cart' style={{ paddingLeft: 13 }} ><BiCart />{pages[1]}</Link>
+
+            </Box>
+
+          </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'block', sm: 'none' } }}>
             <IconButton
               size="large"
@@ -76,21 +84,9 @@ const ResponsiveAppBar = () => {
               </MenuItem>
             </Menu>
           </Box>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex' } }}>
-            <Box
-              sx={{ my: 2, color: 'white', display: 'block' }}
-            >
-              <Link to='/login' style={{ paddingLeft: 13 }} >{pages[0]}</Link>
-              <Link to='/cart' style={{ paddingLeft: 13 }} ><BiCart />{pages[1]}</Link>
-
-            </Box>
-
-          </Box>
-
           <Box sx={{ flexGrow: 0 }}>
             <Box display={'flex'} >
-              <Typography variant="h6" style={{ paddingRight: 13 }} sx={{ display: { xs: 'none', sm: 'block' } }}>دمنوش های گیاهی</Typography>
+              <Typography variant="h6" style={{ paddingRight: 13 }} sx={{ display: { xs: 'none', sm: 'block' } }}>دمنوش کده</Typography>
               <Link to="/"><Avatar className="logo" alt="logo" title="صفحه اصلی" src={logo} /></Link>
             </Box>
             <Menu
@@ -107,14 +103,14 @@ const ResponsiveAppBar = () => {
                 horizontal: 'right',
               }}
               open={Boolean(anchorElUser)}
-            // onClose={handleCloseUserMenu}
             >
-
             </Menu>
           </Box>
+
+
         </Toolbar>
       </Container>
-    </AppBar>
+    </Appbar>
   );
 };
 export default ResponsiveAppBar;

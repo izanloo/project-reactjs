@@ -53,7 +53,6 @@ function Inventory() {
               <th>موجودی</th>
             </tr>
             {product.map((item) => {
-              if (item.category == 1) {
                 return (
                   <tr>
                     <td>{item.name}</td>
@@ -61,7 +60,7 @@ function Inventory() {
                     <td>{item.count}</td>
                   </tr>
                 )
-              }
+              
             })}
           </table>
 
