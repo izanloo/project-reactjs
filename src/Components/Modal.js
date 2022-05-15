@@ -3,13 +3,10 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import InputModal from './InputModal'
-
-
-
 
 export default function ResponsiveDialog() {
   const [open, setOpen] = React.useState(false);
@@ -27,7 +24,7 @@ export default function ResponsiveDialog() {
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        افزودن کالا
+        Open responsive dialog
       </Button>
       <Dialog
         fullScreen={fullScreen}
@@ -35,21 +32,20 @@ export default function ResponsiveDialog() {
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
+        <DialogTitle id="responsive-dialog-title">
+          {"Use Google's location service?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+input
+          </DialogContentText>
+        </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose}>
             close
           </Button>
-          <Button onClick={handleClose} autoFocus>
-            Agree
-          </Button>
-        </DialogActions>
-        <DialogTitle id="responsive-dialog-title">
-        </DialogTitle>
-          {"افزودن /ویرایش کالا"}
-        <DialogContent>
-<InputModal/>
 
-        </DialogContent>
+        </DialogActions>
       </Dialog>
     </div>
   );

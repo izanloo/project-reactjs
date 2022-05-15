@@ -10,7 +10,6 @@ import { useSelector,useDispatch } from 'react-redux'
 
 
 function Login() {
-  // const state = useSelector((state) => state.admin.isLogin)
   const Token = "";
   const Dispatch = useDispatch()
   const navigate = useNavigate()
@@ -39,8 +38,7 @@ function Login() {
           return errors;
         }}
         onSubmit={(values) => {
-          axios
-            .post('http://localhost:3002/auth/login', values)
+          axios.post('http://localhost:3002/auth/login', values)
             .then((response) => {
               if (response.status == 200) {
                 Dispatch(login(true))

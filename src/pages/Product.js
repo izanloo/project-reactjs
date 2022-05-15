@@ -52,7 +52,7 @@ function Product() {
   return (
     <>
   
-    <Todo/>
+    {/* <Todo/> */}
 <Modal/>
       <h2>مدیریت کالاها</h2>
       {product  == null ? "loding" :
