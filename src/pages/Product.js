@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import WithAdmin from '../Layouts/WithAdmin'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import Modal from '../Components/Modal'
-import Todo, {ToDoList} from '../Components/Todo'
+import Modal from '../Components/modal/Modal'
+// import Todo, {ToDoList} from '../Components/Todo'
 
 function Product() {
   const [product, setProduct] = useState([])
