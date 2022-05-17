@@ -12,6 +12,8 @@ import { useSelector } from 'react-redux'
 function Home() {
   const product = useSelector((state) => state.product)
   const dispatch = useDispatch()
+  // const [category2,setCategory2] = useState([])
+  // let arrys=[{}]
   const url = 'http://localhost:3002/products';
 
   function getData() {
@@ -38,7 +40,7 @@ function Home() {
 
       {product.product == null ? "loding" :
         <Box textAlign='center'>
-            {product.product.map((item,i) => {
+            {product.product.slice(0,6).map((item,i) => {
           
                
               if (item.category == 1) {
@@ -51,16 +53,19 @@ function Home() {
             })}
 
             <h2><Linkstyle to='./Category'>چای سبز</Linkstyle></h2>
-            {product.product.map((item,i) => {
+            {product.product.slice(23,29).map((item,i) => {
               if (item.category == 2) {
-                return (
+                // arrys = item
+                // console.log(arrys)
+                // {Object.values(arrys).slice(0,2).map(item=>console.log(item))}
+                                return (
                   <Cards key={i} item={item} />
                 )
 
               }
             })}
             <h2><Linkstyle to='./Category'>چای سیاه</Linkstyle></h2>
-            {product.product.map((item,i) => {
+            {product.product.slice(44,50).map((item,i) => {
               if (item.category == 3) {
                 return (
                   <Cards key={i} item={item} />

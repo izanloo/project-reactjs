@@ -15,7 +15,8 @@ function Product() {
   const [categroys, setCategorys] = useState([])
   const url = 'http://localhost:3002/products';
 
-  useEffect(() => {
+
+  function getProduct(){
     axios({
       url: url,
       method: 'get',
@@ -30,10 +31,8 @@ function Product() {
         console.log(error);
       });
 
-
-
-
-  }, [])
+  }
+  useEffect(() => {getProduct() }, [])
 
 
   useEffect(() => {
@@ -56,9 +55,8 @@ function Product() {
 
     const handeDelete = (e)=>{
      const id=e.target.value
-     console.log(id)
      const request = axios.delete(`http://localhost:3002/products/${id}`)
-     return request.then(response =>response.data)
+     return request.then(getProduct())
     }
   return (
     <>
