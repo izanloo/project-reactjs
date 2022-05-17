@@ -3,6 +3,7 @@ import adminSlice from './LoginSlice'
 import orderSlice from './orderSlice'
 import ProductSlice from './ProductSlice'
 import CategoryIdSlice from './CategoryIdSlice'
+import CardidSlice from './CardidSlice'
 
 
 export const store = configureStore({
@@ -10,6 +11,6 @@ export const store = configureStore({
     admin: adminSlice,
     order: orderSlice,
     product:ProductSlice,
-    categoryId:CategoryIdSlice
+    cardid:CardidSlice
   },
 })

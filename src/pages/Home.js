@@ -14,7 +14,6 @@ function Home() {
   const dispatch = useDispatch()
   const url = 'http://localhost:3002/products';
 
-
   function getData() {
     axios({
       url: url,
@@ -31,17 +30,22 @@ function Home() {
       });
   }
   useEffect(() =>  { getData() }, [])
+
+
   return (
     <Box>
       <h2><Linkstyle to='./Category'>دمنوش های گیاهی</Linkstyle></h2>
 
       {product.product == null ? "loding" :
         <Box textAlign='center'>
-            {product.product.slice(0, 6).map((item,i) => {
+            {product.product.map((item,i) => {
+          
+               
               if (item.category == 1) {
+                // console.log(Object.keys(item).length)
                 return (
-                  <Cards key={i} item={item} />
 
+                  <Cards key={i} item={item}/>
                 )
               }
             })}
