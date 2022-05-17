@@ -66,7 +66,6 @@ export function MultipleSelectChip() {
       target: { value },
     } = event;
     setPersonName(
-      // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
   };
@@ -122,11 +121,60 @@ export default function FormPropsTextFields() {
   function handlepost() {
     const formData = new FormData();
     formData.append("thumbnail", newImage);
-    axios.post(url,{
-        'nameProduct': newProduct.nameProduct,
-        'description': newProduct.description,
-        'category': categoryId.categoryId, 
+    formData.append("nameProduct", newProduct.nameProduct);
+    formData.append("description", newProduct.description);
+    formData.append("category", categoryId.categoryId);
+
+    axios({
+      method: "post",
+      url: url,
+      data: formData,
+      headers: { "Content-Type": "multipart/form-data" },
     })
+
+
+    // axios({
+    //   method: "post",
+    //   url: url,
+    //   data: formData,
+    //   headers: { "Content-Type": "multipart/form-data" },
+    // })
+    //   .then(function (response) {
+    //     //handle success
+    //     console.log(response);
+    //   })
+    //   .catch(function (response) {
+    //     //handle error
+    //     console.log(response);
+    //   });
+
+
+    // axios.post(url, {
+    //         formData
+    //       }, {
+    //         headers: {
+    //           Content-Type:'multipart/form-data'
+    //         }
+    //       }).then(function(response) {
+    //         console.log(response);
+    //       }).catch(function(error) {
+    //         console.log(error);
+    //       })
+    
+    
+
+    // axios.post(url,formData,{
+      
+    // })
+    // .then((res) => console.log(res.data))
+    // .catch((err) => console.log(err));
+
+
+//   axios.post(url,{
+//     'nameProduct': newProduct.nameProduct,
+//     'description': newProduct.description,
+//     'category': categoryId.categoryId, 
+// })
   }
 
 

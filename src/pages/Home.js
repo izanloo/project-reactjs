@@ -9,32 +9,12 @@ import { useDispatch } from 'react-redux';
 import { setProduct } from '../Redux/ProductSlice'
 import { useSelector } from 'react-redux'
 
-
-
-
 function Home() {
   const product = useSelector((state) => state.product)
   const dispatch = useDispatch()
-
-  // const [product, setProduct] = useState()
-  // const [categorys,setcategorys] = useState({})
   const url = 'http://localhost:3002/products';
-  // function getData() {
-  //   axios({
-  //     url: url,
-  //     method: 'get',
-  //     // params: {
-  //     //   token: 'TOP-SECRET'
-  //     // }
-  //   })
-  //     .then(function (response) {
-  //       dispatch(setProduct(response.data))
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // }
-  // useEffect(()=>{getData()},[])
+
+
   function getData() {
     axios({
       url: url,

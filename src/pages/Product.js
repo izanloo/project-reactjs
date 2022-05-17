@@ -7,6 +7,11 @@ import Modal from '../Components/modal/Modal'
 
 function Product() {
   const [product, setProduct] = useState([])
+
+
+
+
+
   const [categroys, setCategorys] = useState([])
   const url = 'http://localhost:3002/products';
 
@@ -49,6 +54,12 @@ function Product() {
 
   }, [])
 
+    const handeDelete = (e)=>{
+     const id=e.target.value
+     console.log(id)
+     const request = axios.delete(`http://localhost:3002/products/${id}`)
+     return request.then(response =>response.data)
+    }
   return (
     <>
   
@@ -64,9 +75,9 @@ function Product() {
               <th>دسته بندی</th>
               <th>لینک</th>
             </tr>
-            {product.map((item) => {
+            {product.map((item,i) => {
                 return (
-                  <tr>
+                  <tr key={i}>
                     <td><img className='productImg' src={item.images} /></td>
                     <td>{item.name}</td>
                     {categroys.map(categroyItem => {
@@ -76,7 +87,7 @@ function Product() {
                             <td>{categroyItem.name}</td>
                             <td>
                               <Link to='/'>ویرایش </Link>
-                              <Link to='/'>حذف</Link>
+                              <button value={item.id} onClick={handeDelete}>حذف</button>
                             </td>
                           </>
 
@@ -94,8 +105,6 @@ function Product() {
         </div>
 
       }
-
-
     </>
   )
 }
