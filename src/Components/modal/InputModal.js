@@ -123,7 +123,7 @@ export default function FormPropsTextFields() {
     formData.append("thumbnail", newImage);
     formData.append("nameProduct", newProduct.nameProduct);
     formData.append("description", newProduct.description);
-    formData.append("category", categoryId.categoryId);
+    // formData.append("category", categoryId.categoryId);
 
     axios({
       method: "post",

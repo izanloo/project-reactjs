@@ -7,6 +7,11 @@ import { CardActionArea } from '@mui/material';
 import { useNavigate } from 'react-router-dom'
 import WithUser from '../Layouts/WithUser'
 import { useSelector } from 'react-redux'
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import {TextFild} from '../Assest/Style/abstracts/Stylecomponent'
+
 
 
  function Detail() {
@@ -20,13 +25,9 @@ import { useSelector } from 'react-redux'
     return navigate('/cart')
    }
   return (
-    <div>
-
-
-
-
+    <>
     {product.product == null ? "loding" :
-        <div textAlign='center'>
+        <Box textAlign='center' sx={{display:{xs:'block' , sm:'flex'}, justifyContent:'center'}}>
             {product.product.map((item,i) => {
           
                
@@ -51,7 +52,24 @@ import { useSelector } from 'react-redux'
                     </CardContent>
                   </CardActionArea>
                 </Card>        
-                  <div>{item.description}</div>
+                  <Box sx={{paddingTop:{xs: '5%' , sm:'15%'} , width:{xs: '100%', sm:'50%'}}} >
+                    <Box>{item.description}</Box>
+                    <Button  onClick={handleAdd} variant="contained" color="success">
+        نهایی کردن خرید
+      </Button>
+      <TextFild type="number"  min="1" max="100"/>
+
+
+                    </Box>
+                  {/* <TextField
+      id="contact phone number"
+      label="Contact phone number"
+      type="number"
+      value={this.state.contactPhoneNumber}
+      onChange={this.handleChange('contactPhoneNumber')}
+      placeholder="Contact phone number"
+      margin="normal"
+/> */}
                   </>
 
                 )
@@ -59,12 +77,12 @@ import { useSelector } from 'react-redux'
             })
           }
 
-            </div>
+
+            </Box>
           }
 
 
-        <button  onClick={handleAdd}>افزودن به سبد خرید</button>
-    </div>
+    </>
   )
 }
 export default WithUser(Detail)

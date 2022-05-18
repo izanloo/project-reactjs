@@ -107,3 +107,11 @@ form{
 export { Loginstyle }
 
 
+const TextFild = styled('input')`
+width: 50px;
+height: 22px;
+padding: -1px;
+margin: 9px;
+`
+
+export { TextFild }
