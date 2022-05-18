@@ -1,15 +1,13 @@
-
-import  React,{useState} from 'react';
+import  React from 'react';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { Box } from '@mui/system';
-import { Cardstyle } from '../Assest/Style/abstracts/Stylecomponent';
+import { Cardstyle } from '../../Assest/Style/abstracts/Stylecomponent';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux'
-import { setIdcard } from '../Redux/CardidSlice'
-import { Button } from "@mui/material";
+import { setIdcard } from '../../Redux/CardidSlice'
 import { Link } from "react-router-dom";
 
 
@@ -25,8 +23,8 @@ export default function Cards(props) {
 
   return (
     <>
-    <Box  sx={{width:{xs:'90%' , sm:'30%' }, display:{xs:'block' , sm:'inline-block;'}}} onClick={()=>dispatch(setIdcard(item.id))}    >
-      <Cardstyle >
+    <Box  sx={{width:{xs:'90%' , sm:'30%' }, display:{xs:'block' , sm:'inline-block;'}}} >
+      <Cardstyle  onClick={()=>dispatch(setIdcard(item.id))}>
         <CardActionArea  >
         <Link to='/detail'  >
           <CardMedia
@@ -45,7 +43,6 @@ export default function Cards(props) {
               قیمت : {item.price}
             </Typography>
           </CardContent>
-       
         </CardActionArea>
       </Cardstyle>
     </Box>

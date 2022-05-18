@@ -1,22 +1,19 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Link } from 'react-router-dom'
+import {  Navigate } from 'react-router-dom'
 import WithUser from '../Layouts/WithUser'
 import axios from 'axios'
-import Cards from "../Components/Cards";
 import { Box } from "@mui/material";
 import { Linkstyle } from "../Assest/Style/abstracts/Stylecomponent";
 import { useDispatch } from 'react-redux';
 import { setProduct } from '../Redux/ProductSlice'
-import { useSelector } from 'react-redux'
+import Main from '../Components/Home/Main'
+
 
 function Home() {
-  const product = useSelector((state) => state.product)
   const dispatch = useDispatch()
-  // const [category2,setCategory2] = useState([])
-  // let arrys=[{}]
   const url = 'http://localhost:3002/products';
 
-  function getData() {
+  function getProduct() {
     axios({
       url: url,
       method: 'get',
@@ -31,54 +28,34 @@ function Home() {
         console.log(error);
       });
   }
-  useEffect(() =>  { getData() }, [])
+  useEffect(() => { getProduct() }, [])
+  /////////////////////////////////////////////////////
+  const [category, setCategory] = useState([]);
+  useEffect(() => {
+
+    getData();
+  }, []);
+  async function getData() {
+    try {
+      const category = await axios.get("http://localhost:3002/category");
+      setCategory(category.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
 
   return (
-    <Box>
-      <h2><Linkstyle to='./Category'>دمنوش های گیاهی</Linkstyle></h2>
-
-      {product.product == null ? "loding" :
-        <Box textAlign='center'>
-            {product.product.slice(0,6).map((item,i) => {
-          
-               
-              if (item.category == 1) {
-                // console.log(Object.keys(item).length)
-                return (
-
-                  <Cards key={i} item={item}/>
-                )
-              }
-            })}
-
-            <h2><Linkstyle to='./Category'>چای سبز</Linkstyle></h2>
-            {product.product.slice(23,29).map((item,i) => {
-              if (item.category == 2) {
-                // arrys = item
-                // console.log(arrys)
-                // {Object.values(arrys).slice(0,2).map(item=>console.log(item))}
-                                return (
-                  <Cards key={i} item={item} />
-                )
-
-              }
-            })}
-            <h2><Linkstyle to='./Category'>چای سیاه</Linkstyle></h2>
-            {product.product.slice(44,50).map((item,i) => {
-              if (item.category == 3) {
-                return (
-                  <Cards key={i} item={item} />
-
-                )
-              }
-            })}
-        </Box>
-
-
+    <Box >
+      {category == null ? <Navigate to='/' /> :
+        category.map((item) => (
+          <>
+            <Linkstyle to='/category'>
+              <h2> {item.name}</h2>
+            </Linkstyle>
+            <Main idCategory={item.id} key={item.id} /></>
+        ))
       }
-
-
     </Box>
   )
 } export default WithUser(Home)
