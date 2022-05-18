@@ -4,7 +4,7 @@ import Sidebar from '../Components/Sidebar'
 
 function WithUser(Component) {
     const pathCurrent = window.location
-    const pathCategory = '/Category'
+    const pathCategory = '/category'
     return function UserLayout({ ...props }) {
         return (
             <>

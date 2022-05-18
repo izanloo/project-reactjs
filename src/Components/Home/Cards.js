@@ -23,7 +23,7 @@ export default function Cards(props) {
 
   return (
     <>
-    <Box  sx={{width:{xs:'90%' , sm:'30%' }, display:{xs:'block' , sm:'inline-block;'}}} >
+    <Box   sx={{width:{xs:'90%' , sm:'30%' }, display:{xs:'block' , sm:'inline-block;'}}} >
       <Cardstyle  onClick={()=>dispatch(setIdcard(item.id))}>
         <CardActionArea  >
         <Link to='/detail'  >
