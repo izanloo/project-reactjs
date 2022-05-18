@@ -50,8 +50,8 @@ function Home() {
       {category == null ? <Navigate to='/' /> :
         category.map((item) => (
           <>
-            <Linkstyle to='/category'>
-              <h2> {item.name}</h2>
+            <Linkstyle to='/category'   state={{ from: item }}>
+             <h2> {item.name}</h2>
             </Linkstyle>
             <Main idCategory={item.id} key={item.id} /></>
         ))

@@ -7,11 +7,6 @@ import Modal from '../Components/modal/Modal'
 
 function Product() {
   const [product, setProduct] = useState([])
-
-
-
-
-
   const [categroys, setCategorys] = useState([])
   const url = 'http://localhost:3002/products';
 
@@ -76,7 +71,7 @@ function Product() {
             {product.map((item,i) => {
                 return (
                   <tr key={i}>
-                    <td><img className='productImg' src={item.images} /></td>
+                    <td><img className='productImg' src={`http://localhost:3002${item.thumbnail}`}/></td>
                     <td>{item.name}</td>
                     {categroys.map(categroyItem => {
                       if (categroyItem.id == item.category) {
