@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import {  Navigate } from 'react-router-dom'
 import WithUser from '../Layouts/WithUser'
 import axios from 'axios'
+import {api} from '../services/Config'
 import { Box } from "@mui/material";
 import { Linkstyle } from "../Assest/Style/abstracts/Stylecomponent";
 import { useDispatch } from 'react-redux';
@@ -39,7 +40,7 @@ function Home() {
   }, []);
   async function getData() {
     try {
-      const category = await axios.get("http://localhost:3002/category");
+      const category = await api.get("/category");
       setCategory(category.data);
     } catch (error) {
       console.log(error);
