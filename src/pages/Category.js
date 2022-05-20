@@ -16,7 +16,7 @@ function Category() {
   const location = useLocation()
   const { from } = location.state
   return (
-    <>
+    <div>
       {product.product == null ? <Navigate to='/category' /> :
         <>
           <h1>{from.name}</h1>
@@ -30,7 +30,7 @@ function Category() {
           })}
         </>
       }
-    </>
+    </div>
 
   )
 }

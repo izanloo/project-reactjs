@@ -29,6 +29,8 @@ function Home() {
       });
   }
   useEffect(() => { getProduct() }, [])
+
+
   /////////////////////////////////////////////////////
   const [category, setCategory] = useState([]);
   useEffect(() => {
@@ -53,7 +55,7 @@ function Home() {
             <Linkstyle to='/category'   state={{ from: item }}>
              <h2> {item.name}</h2>
             </Linkstyle>
-            <Main idCategory={item.id} key={item.id} /></>
+            <Main idCategory={item.id} key={item.id} sx={{color:'red'}} /></>
         ))
       }
     </Box>

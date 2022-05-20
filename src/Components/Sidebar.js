@@ -1,28 +1,26 @@
-import React, { useEffect } from "react";
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
 import WithUser from '../Layouts/WithUser'
-import axios from 'axios'
-import Cards from "../Components/Cards";
-import { Box } from "@mui/material";
-import { Linkstyle } from "../Assest/Style/abstracts/Stylecomponent";
-import { useDispatch } from 'react-redux';
-import { setProduct } from '../Redux/ProductSlice'
 import { useSelector } from 'react-redux'
+import axios from 'axios'
+import { Box } from "@mui/material";
 
-function Home() {
+
+
+
+function Sidebar() {
+  // const product = useSelector((state) => state.product)
   const [product,setProduct]  = useState([])
   const url = 'http://localhost:3002/products';
-
   function getData() {
     axios({
       url: url,
       method: 'get',
-      params: {
-        token: 'TOP-SECRET'
-      }
+      // params: {
+      //   token: 'TOP-SECRET'
+      // }
     })
       .then(function (response) {
-        dispatch(setProduct(response.data))
+      setProduct(response.data)
       })
       .catch(function (error) {
         console.log(error);
@@ -31,42 +29,47 @@ function Home() {
   useEffect(() =>  { getData() }, [])
 
 
+
   return (
+
     <Box>
 
-      {product == null ? "loding" :
-        <Box textAlign='center'>
-            {product.map((item,i) => {
-              if (item.category == 1) {
-                // console.log(Object.keys(item).length)
-                return (
+    {product == null ? "loding" :
+      <Box textAlign='center'>
+          {product.map((item,i) => {
+            if (item.category == 1) {
+              return (
 
-                  <p key={i} item={item}>{item.name}</p>
-                )
-              }
-              if (item.category == 2) {
-                // console.log(Object.keys(item).length)
-                return (
+                <p key={i}>{item.name}</p>
+              )
+            }
+            if (item.category == 2) {
+              return (
 
-                  <p key={i} item={item}>{item.name}</p>
-                )
-              
-              }
-              if (item.category == 3) {
-                // console.log(Object.keys(item).length)
-                return (
+                <p >{item.name}</p>
+              )
+            
+            }
+            if (item.category == 3) {
+              return (
 
-                  <p key={i} item={item}>{item.name}</p>
-                )
-              }
-            })}
+                <p>{item.name}</p>
+              )
+            }
+          })}
 
-        </Box>
+      </Box>
 
 
-      }
+    }
 
 
-    </Box>
+  </Box>
+
+
   )
-} export default WithUser(Home)
+}
+export default Sidebar
+
+
+

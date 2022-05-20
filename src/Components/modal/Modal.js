@@ -38,13 +38,10 @@ export default function ResponsiveDialog() {
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            <InputModal />
+<InputModal/>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-        <Button onClick={handleClose} autoFocus>
-            ذخیره
-          </Button>
           <Button autoFocus onClick={handleClose}>
             close
           </Button>

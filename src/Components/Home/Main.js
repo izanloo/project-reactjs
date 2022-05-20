@@ -21,7 +21,7 @@ export default function Category(props) {
   async function getData() {
     try {
       const products = await axios.get(
-        `http://localhost:3002/products?category=${idCategory}`
+        `http://localhost:3002/products?_limit=6/category=${idCategory}`
       );
       setProduct(products.data);
     } catch (error) { 
@@ -33,7 +33,7 @@ export default function Category(props) {
   return (
     <>
     {product ? (
-        product.slice(-6).map((item) => (
+        product.map((item) => (
           <>
               <Cards item={item} key={item.id}  />
           </>
