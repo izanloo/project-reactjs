@@ -12,20 +12,21 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { TextFild } from '../Assest/Style/abstracts/Stylecomponent'
 import axios from 'axios'
+import { useLocation } from 'react-router-dom'
+
 
 
 
 function Detail() {
-  const cardid = useSelector((state) => state.cardid)
-  const product = useSelector((state) => state.product)
   const [categroys, setCategorys] = useState([])
-
+  const [product, setProduct] = useState([])
+  const location = useLocation()
+  const { from } = location.state
 
   const navigate = useNavigate()
   function handleAdd() {
     return navigate('/cart')
   }
-  console.log(cardid.cardid)
 
 
 //request for get category name
@@ -42,18 +43,31 @@ function Detail() {
         console.log(error);
       });
 
+  }, [])
 
 
+  useEffect(() => {
+    axios({
+      url: 'http://localhost:3002/products',
+      method: 'get',
+
+    })
+      .then(function (response) {
+        setProduct(response.data)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 
   }, [])
 
   return (
     <>
-      {product.product == null ? <Navigate to='/' /> :
+      {product == null ? <Navigate to='/' /> :
         <Box textAlign='center' sx={{ display: { xs: 'block', sm: 'flex' }, justifyContent: 'center' }}>
-          {product.product.map((item, i) => {
+          {product.map((item, i) => {
                       
-            if (item.id == cardid.cardid) {
+            if (item.id == from.id) {
               return (
                 <>
                   <Card sx={{ maxWidth: 345, mt: 15 }}>

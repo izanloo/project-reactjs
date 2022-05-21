@@ -28,7 +28,7 @@ export default function AppRouter() {
         <Route path='' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/cart' element={<Cart />} />
-        <Route path='/detail' element={<Detail />} />
+        <Route path='/detail/:id' element={<Detail />} />
         <Route path='/category' element={<Category />} />
         <Route path='/finalbuy' element={<FinallBuy />} />
         <Route path='/payment' element={<Payment />} />

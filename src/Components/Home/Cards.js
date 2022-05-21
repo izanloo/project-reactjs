@@ -19,13 +19,12 @@ export default function Cards(props) {
   // if(cardid.cardid >0){
   //   return <Navigate to="/detail" replace={false}/>
   // }
-
   return (
     <>
     <Box   sx={{width:{xs:'90%' , sm:'30%' }, display:{xs:'block' , sm:'inline-block;'}}} >
       <Cardstyle  onClick={()=>dispatch(setIdcard(item.id))}>
         <CardActionArea  >
-        <Link to='/detail'  >
+        <Link to={`/detail/${item.id}`}    state={{ from: item }} >
           <CardMedia
             component="img"
             height="140"
