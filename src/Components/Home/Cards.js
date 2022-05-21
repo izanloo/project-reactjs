@@ -19,7 +19,6 @@ export default function Cards(props) {
   // if(cardid.cardid >0){
   //   return <Navigate to="/detail" replace={false}/>
   // }
-  console.log(cardid.cardid)
 
   return (
     <>

@@ -21,7 +21,10 @@ export default function Category(props) {
   async function getData() {
     try {
       const products = await axios.get(
-        `http://localhost:3002/products?_limit=6/category=${idCategory}`
+        `http://localhost:3002/products?_sort=votes&_order=asc/category=${idCategory}`
+        // `http://localhost:3002/products?_limit=6/category=${idCategory}`
+        
+        
       );
       setProduct(products.data);
     } catch (error) { 

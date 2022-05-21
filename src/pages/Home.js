@@ -51,7 +51,7 @@ function Home() {
   return (
     <Box >
       {category == null ? <Navigate to='/' /> :
-        category.map((item) => (
+        category.map((item,i) => (
           <>
             <Linkstyle to='/category'   state={{ from: item }}>
              <h2> {item.name}</h2>

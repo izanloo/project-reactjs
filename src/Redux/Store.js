@@ -11,6 +11,7 @@ export const store = configureStore({
     admin: adminSlice,
     order: orderSlice,
     product:ProductSlice,
-    cardid:CardidSlice
+    cardid:CardidSlice,
+    categoryId:CategoryIdSlice
   },
 })
