@@ -20,12 +20,31 @@ import { useLocation } from 'react-router-dom'
 function Detail() {
   const [categroys, setCategorys] = useState([])
   const [product, setProduct] = useState([])
+  const[valueInput,setValueinput] = useState()
+  const [massege,setMassage] = useState("")
   const location = useLocation()
   const { from } = location.state
 
   const navigate = useNavigate()
   function handleAdd() {
-    return navigate('/cart')
+    const a=valueInput
+    console.log(a)
+    
+    product.map((item,i)=>{
+      
+      if(item.id == from.id){
+        if(valueInput > item.count){
+          setMassage("موجودی کم است")
+        }
+        if(valueInput <= item.count){
+            localStorage.setItem('productCart', JSON.stringify(item));
+          
+          return navigate('/cart')
+        }
+        
+      }
+    })
+ 
   }
 
 
@@ -68,6 +87,7 @@ function Detail() {
           {product.map((item, i) => {
                       
             if (item.id == from.id) {
+              // setItem(item)
               return (
                 <>
                   <Card sx={{ maxWidth: 345, mt: 15 }}>
@@ -92,8 +112,10 @@ function Detail() {
                     <Button onClick={handleAdd} variant="contained" color="success">
                       نهایی کردن خرید
                     </Button>
-                    <TextFild type="number" min="1" max="100" />
+                    <TextFild type="number" min="1" max="100" onChange={(e)=>setValueinput(e.target.value)} />
+                    <Box>موجودی انبار:{item.count}</Box>
 
+                    {massege !=null ? <p>{massege}</p> : null}
 
                   </Box>
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import WithUser from '../Layouts/WithUser'
 import { useNavigate } from 'react-router-dom'
 import { DataGrid } from '@mui/x-data-grid';
@@ -38,6 +38,14 @@ const rows = [
 
 
  function Cart() {
+
+  useEffect(()=>{
+    // if (typeof window !== "undefined") {
+      const data = localStorage.getItem('productCart');
+      const initialData = data !== null ? JSON.parse(data) : null;
+      console.log(initialData) ;
+    // }
+  },[])
   const navigate = useNavigate()
   function handlePyment(){
    return navigate('/finalbuy')
