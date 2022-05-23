@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import {  Navigate } from 'react-router-dom'
 import WithUser from '../Layouts/WithUser'
 import axios from 'axios'
@@ -8,6 +8,8 @@ import { Linkstyle } from "../Assest/Style/abstracts/Stylecomponent";
 import { useDispatch } from 'react-redux';
 import { setProduct } from '../Redux/ProductSlice'
 import Main from '../Components/Home/Main'
+
+
 
 
 function Home() {
