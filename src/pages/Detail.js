@@ -75,7 +75,7 @@ function Detail() {
                       <CardMedia
                         component="img"
                         height="281"
-                        image={`http://localhost:3002${item.thumbnail}`} alt="green iguana"
+                        image={`http://localhost:3002/files/${item.image}`} alt="green iguana"
                       />
                       <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
