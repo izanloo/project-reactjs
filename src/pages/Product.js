@@ -126,6 +126,12 @@ const [item,setItem] = useState([])
         </div>
 
       }
+      {product == null ? "loading" : <p>
+        {product.map((item,i)=>{
+                   let  items={'name': item.name}
+                   let newList = Object.assign(rows, items)
+        })}
+      </p> }
     {/* <Box sx={{padding:5}}>
         <h1>مدیریت کالا</h1>
         <div style={{ height: 400, width: '100%' }}>
