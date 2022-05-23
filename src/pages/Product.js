@@ -71,7 +71,7 @@ function Product() {
             {product.map((item,i) => {
                 return (
                   <tr key={i}>
-                    <td><img className='productImg' src={`http://localhost:3002${item.thumbnail}`}/></td>
+                    <td><img className='productImg' src={`http://localhost:3002/files/${item.image}`}/></td>
                     <td>{item.name}</td>
                     {categroys.map(categroyItem => {
                       if (categroyItem.id == item.category) {

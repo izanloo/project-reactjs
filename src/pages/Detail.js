@@ -37,9 +37,11 @@ function Detail() {
           setMassage("موجودی کم است")
         }
         if(valueInput <= item.count){
-            localStorage.setItem('productCart', JSON.stringify(item));
+         let  items={'valueInput': valueInput}
+          let newList = Object.assign(item, items)
+            localStorage.setItem("item", JSON.stringify(newList));
           
-          return navigate('/cart')
+          // return navigate('/cart')
         }
         
       }

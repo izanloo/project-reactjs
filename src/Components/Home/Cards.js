@@ -28,7 +28,7 @@ export default function Cards(props) {
           <CardMedia
             component="img"
             height="140"
-            image={`http://localhost:3002${item.thumbnail}`}
+            image={`http://localhost:3002/files/${item.image}`}
             alt="دمنوش گیاهی"
           />
               </Link>

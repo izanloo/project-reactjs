@@ -109,6 +109,7 @@ export function MultipleSelectChip() {
 
 export default function FormPropsTextFields() {
   const categoryId = useSelector((state) => state.categoryId)
+  const [fileImage, setFileimage] = useState()
   const [newProduct, setNewproduct] = React.useState({
     nameProduct: '',
     description: '',
@@ -116,11 +117,9 @@ export default function FormPropsTextFields() {
 
   //add product 
   function handlepost() {
-
     let formData = new FormData()
     let imagefile = document.querySelector('#file')
     formData.append('image', imagefile.files[0])
-
     axios({
       method: 'post',
       data: formData,
@@ -130,8 +129,25 @@ export default function FormPropsTextFields() {
       }
     }
     )
+
       .then((res) => {
-        
+        axios({
+          method: 'post',
+          data: {
+            "name": newProduct.nameProduct,
+            "category": categoryId.categoryId,
+            "price": "25000",
+            "count": "12",
+            "description": newProduct.description,
+            'images': "d06866922fc21d90e6830ec31f63cae5",
+            'image': res.data.filename
+          },
+          url: 'http://localhost:3002/products',
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+        )
       })
       .catch((error) => {
         // error.response.status Check status code
@@ -139,45 +155,13 @@ export default function FormPropsTextFields() {
         //Perform action in always
       });
 
-
-
-
-    //right 
-    // let formData = new FormData()
-    // let imagefile = document.querySelector('#file')
-    // formData.append("name", newProduct.nameProduct);
-    // formData.append("category", categoryId.categoryId);
-    // formData.append("price", "25000");
-    // formData.append("count", "12");
-    // formData.append("description", newProduct.description);
-    // formData.append("images","d06866922fc21d90e6830ec31f63cae5");
-    // formData.append('image', imagefile.files[0])
-
-    // axios({
-    //   method: 'post',
-    //   data: formData,
-    //   url: url,
-    //   headers: {
-    //     'Content-Type': 'multipart/form-data'
-    //   }
-    // }
-    // )
-    //   .then((res) => {
-        
-    //   })
-    //   .catch((error) => {
-    //     // error.response.status Check status code
-    //   }).finally(() => {
-    //     //Perform action in always
-    //   });
-
   }
 
 
   function handleChange(e) {
     setNewproduct({ ...newProduct, [e.target.name]: e.target.value })
-
   }
+  
   return (
     <Box
       component="form"
@@ -191,7 +175,7 @@ export default function FormPropsTextFields() {
       <Typography>عکس کالا</Typography>
       <Button variant="contained" component="label" color="primary">
         Upload a image
-        <input type="file" id="file" accept="image/*" hidden />
+        <input type="file" name="file" id="file" accept="image/*" hidden />
       </Button>
       <Typography>نام کالا</Typography>
       <TextField name='nameProduct' onChange={handleChange} />
