@@ -10,10 +10,14 @@ import { useSelector,useDispatch } from 'react-redux'
 
 
 function Login() {
-  const Token = "";
   const Dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
+  const state = useSelector((state) => state.admin.isLogin)
+  const ACCESS_TOKEN="";
+  const redirectaddress = location.state?.from.pathname || '/paneladmin'
+
+
    
   const [errorlogin, setErorr] = useState({
     usernameErr: '',
@@ -38,17 +42,18 @@ function Login() {
           return errors;
         }}
         onSubmit={(values) => {
-          axios.post('http://localhost:3002/auth/login', values)
-            .then((response) => {
-              if (response.status == 200) {
-                Dispatch(login(true))
-                localStorage.setItem(Token, response.data.token)
-                navigate('/paneladmin/orders', { replace:true })
-              }
-            })
-            .catch(() => {
-              alert("کابری وجود ندارد");
-            });
+          axios
+          .post('http://localhost:3002/auth/login',values)
+    .then((res) => {
+      if (res.status == 200) {
+        Dispatch( login(true))
+       localStorage.setItem(ACCESS_TOKEN,res.data.token)
+        navigate(redirectaddress,{replace:true})
+      }
+    })
+    .catch(() => {
+      alert("با این نام کاربری کاربری ثبت نشده");
+    });
         }}
       >
         {props => (

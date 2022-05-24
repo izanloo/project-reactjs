@@ -1,42 +1,105 @@
-import React, { useState, useEffect } from "react";
-import { Grid } from "@mui/material";
-import { useSelector } from "react-redux";
-import axios from "axios";
-import Table from "../Components/Tabel";
-import WithAdmin from '../Layouts/WithAdmin';
+import React, { useState, useEffect } from 'react'
+import WithAdmin from '../Layouts/WithAdmin'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
+import Modal from '../Components/modal/Modal'
+import ModalEdit from '../Components/modal/ModalEdit'
+// import Todo, {ToDoList} from '../Components/Todo'
 
- function Product() {
-  const [row, setRow] = useState([]);
-  const [rowCat, setRowCat] = useState([]);
-  useEffect(() => {
-    // axios.get("http://localhost:3002/products").then((res) => setRow(res.data));
-    // axios.get("http://localhost:3002/category").then((res)=> setRowCat(res.data) )
-    getData();
-  }, []);
-  async function getData() {
-    try {
-      const products = await axios.get("http://localhost:3002/products");
-      const category = await axios.get("http://localhost:3002/category");
-     setRow(products.data);
-      setRowCat(category.data);
-    } catch (error) {
-     alert("loading");
-    }
+function Product() {
+  const [product, setProduct] = useState([])
+  const [categroys, setCategorys] = useState([])
+  const url = 'http://localhost:3002/products';
+
+
+  function getProduct(){
+    axios({
+      url: url,
+      method: 'get',
+      // params: {
+      //   token: 'TOP-SECRET'
+      // }
+    })
+      .then(function (response) {
+        setProduct(response.data)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
   }
- // console.log(rowCat);
-  return (
-    <Grid container >
-      <Grid item xs={6} md={4} sx={{ mr: 25 }}>
-        <h1>مدیریت کالاها</h1>
-      </Grid>
-      <Grid item xs={6} md={4}>
-        {/* <ModalProduct hand /> */}
-      </Grid>
-      <Grid item xs={12} md={8}>
-        <Table row={row} rowCat={rowCat} setRow={setRow} setRowCat={setRowCat} />
-      </Grid>
-    </Grid>
-  );
-}
+  useEffect(() => {getProduct() }, [])
 
-export default WithAdmin(Product) ;
+
+  useEffect(() => {
+    axios({
+      url: 'http://localhost:3002/category',
+      method: 'get',
+
+    })
+      .then(function (response) {
+        setCategorys(response.data)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+
+
+
+  }, [])
+
+    const handeDelete = (e)=>{
+     const id=e.target.value
+     const request = axios.delete(`http://localhost:3002/products/${id}`)
+     return request.then(getProduct())
+    }
+  return (
+    <>
+  
+    {/* <Todo/> */}
+<Modal/>
+      <h2>مدیریت کالاها</h2>
+      {product  == null ? "loding" :
+        <div>
+          <table dir="rtl">
+            <tr>
+              <th>تصویر</th>
+              <th>نام کالا</th>
+              <th>دسته بندی</th>
+              <th>لینک</th>
+            </tr>
+            {product.map((item,i) => {
+                return (
+                  <tr key={i}>
+                    <td><img className='productImg' src={`http://localhost:3002/files/${item.image}`}/></td>
+                    <td>{item.name}</td>
+                    {categroys.map(categroyItem => {
+                      if (categroyItem.id == item.category) {
+                        return (
+                          <>
+                            <td>{categroyItem.name}</td>
+                            <td>
+                              <ModalEdit/>
+                              <button value={item.id} onClick={handeDelete}>حذف</button>
+                            </td>
+                          </>
+
+                        )
+                      }
+
+                    })}
+                  </tr>
+                )
+          
+          })}
+          </table>
+
+
+        </div>
+
+      }
+    </>
+  )
+}
+export default WithAdmin(Product)
