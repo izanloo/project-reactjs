@@ -15,7 +15,7 @@ function Login() {
   const location = useLocation()
   const state = useSelector((state) => state.admin.isLogin)
   const ACCESS_TOKEN="";
-  const redirectaddress = location.state?.from.pathname || '/paneladmin'
+  const redirectaddress = location.state?.from.pathname || '/paneladmin/orders'
 
 
    
