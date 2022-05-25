@@ -3,6 +3,7 @@ import WithUser from '../Layouts/WithUser'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { Box } from "@mui/material";
+import {api} from '../services/Config'
 
 
 
@@ -29,6 +30,19 @@ function Sidebar() {
   useEffect(() =>  { getData() }, [])
 
 
+  const [category, setCategory] = useState([]);
+  useEffect(() => {
+
+    getCategory();
+  }, []);
+  async function getCategory() {
+    try {
+      const category = await api.get("/category");
+      setCategory(category.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
 
@@ -36,24 +50,29 @@ function Sidebar() {
 
     {product == null ? "loding" :
       <Box textAlign='center'>
+        <h4>{category[0].name}</h4>
           {product.map((item,i) => {
             if (item.category == 1) {
               return (
-
                 <p key={i}>{item.name}</p>
               )
             }
+          })}
+
+<h4>{category[1].name}</h4>
+          {product.map((item,i) => {
             if (item.category == 2) {
               return (
-
-                <p >{item.name}</p>
+                <p key={i}>{item.name}</p>
               )
-            
             }
-            if (item.category == 3) {
-              return (
+          })}
 
-                <p>{item.name}</p>
+                  <h4>{category[0].name}</h4>
+          {product.map((item,i) => {
+            if (item.category == 1) {
+              return (
+                <p key={i}>{item.name}</p>
               )
             }
           })}

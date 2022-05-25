@@ -1,6 +1,5 @@
 import React from 'react'
 import User from '../Layouts/WithUser'
-import Sidebar from '../Components/Sidebar'
 import { Link, useLocation, Navigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import CardContent from '@mui/material/CardContent';
@@ -15,9 +14,12 @@ function Category() {
   const product = useSelector((state) => state.product)
   const location = useLocation()
   const { from } = location.state
+
+
+  
   return (
-    <div>
-      {product.product == null ? <Navigate to='/category' /> :
+    <div style={{color:'red'}}>
+    {product.product == null ? <Navigate to='/category' /> :
         <>
           <h1>{from.name}</h1>
           {product.product.map((item, i) => {

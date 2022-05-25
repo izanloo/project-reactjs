@@ -4,6 +4,7 @@ import orderSlice from './orderSlice'
 import ProductSlice from './ProductSlice'
 import CategoryIdSlice from './CategoryIdSlice'
 import CardidSlice from './CardidSlice'
+import ItemCardSlice from './ItemCardSlice'
 
 
 export const store = configureStore({
@@ -12,6 +13,7 @@ export const store = configureStore({
     order: orderSlice,
     product:ProductSlice,
     cardid:CardidSlice,
-    categoryId:CategoryIdSlice
+    categoryId:CategoryIdSlice,
+    itemCard:ItemCardSlice
   },
 })
