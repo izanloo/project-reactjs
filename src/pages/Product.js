@@ -54,6 +54,12 @@ function Product() {
      const request = axios.delete(`http://localhost:3002/products/${id}`)
      return request.then(getProduct())
     }
+
+
+    const getId = (e)=>{
+      const id=e.target.value
+      console.log("jjjj",id)
+     }
   return (
     <>
   
@@ -80,7 +86,7 @@ function Product() {
                           <>
                             <td>{categroyItem.name}</td>
                             <td>
-                              <ModalEdit/>
+                            <ModalEdit value={item.id}  />
                               <button value={item.id} onClick={handeDelete}>حذف</button>
                             </td>
                           </>
