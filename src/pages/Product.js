@@ -86,7 +86,7 @@ function Product() {
                           <>
                             <td>{categroyItem.name}</td>
                             <td>
-                            <ModalEdit value={item.id}  />
+                            {/* <ModalEdit value={item.id}  /> */}
                               <button value={item.id} onClick={handeDelete}>حذف</button>
                             </td>
                           </>

@@ -16,23 +16,7 @@ export default function Cards(props) {
   const dispatch = useDispatch()
   const cardid = useSelector((state) => state.cardid)
 
-  // const itemCard = useSelector((state) => state.itemCard)
-//   const [product, setProduct] = useState([]);
-//     useEffect(() => {
-//     getData();
-//   }, []);
 
-//   async function getData() {
-//     try {
-//       const products = await axios.get(`http://localhost:3002/products`);
-//       setProduct(products.data);
-//     } catch (error) { 
-//       alert(error);
-//     }
-//   }
-//  if(product !=null){
-//    product.map(item=>dispatch(setItemCard(item.id)))
-//  }
   return (
     <>
     <Box   sx={{width:{xs:'90%' , sm:'30%' }, display:{xs:'block' , sm:'inline-block;'}}} >
