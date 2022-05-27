@@ -3,39 +3,14 @@ import WithAdmin from '../Layouts/WithAdmin'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Modal from '../Components/modal/Modal'
-
-import { useNavigate } from 'react-router-dom'
-import { DataGrid } from '@mui/x-data-grid';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-
+import FormEdit from '../Components/modal/FormEdit'
 // import Todo, {ToDoList} from '../Components/Todo'
 
 function Product() {
   const [product, setProduct] = useState([])
   const [categroys, setCategorys] = useState([])
   const url = 'http://localhost:3002/products';
-const [item,setItem] = useState([])
 
-  const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'name', headerName: 'عکس کالا', width: 130 },
-    { field: 'count', headerName: 'نام کالا', width: 130 },
-    {
-      field: 'price',
-      headerName: 'دسته بندی',
-      type: 'number',
-      width: 70,
-    },
-    { field: 'count', headerName: 'ویرایش', width: 130 },
-    { field: 'delete', headerName: 'حذف', width: 70 },
-  
-  
-  ];
-  const rows = [
-    { id:1, name: ' ریزمیوه', count: 2, price: 35520 , delete:'حذف' },
-  ];
-  console.log(rows)
 
   function getProduct(){
     axios({
@@ -57,6 +32,7 @@ const [item,setItem] = useState([])
 
 
   useEffect(() => {
+    
     axios({
       url: 'http://localhost:3002/category',
       method: 'get',
@@ -80,6 +56,11 @@ const [item,setItem] = useState([])
      return request.then(getProduct())
     }
 
+
+    const getId = (e)=>{
+      const id=e.target.value
+      console.log("jjjj",id)
+     }
   return (
     <>
   
@@ -96,7 +77,6 @@ const [item,setItem] = useState([])
               <th>لینک</th>
             </tr>
             {product.map((item,i) => {
-
                 return (
                   <tr key={i}>
                     <td><img className='productImg' src={`http://localhost:3002/files/${item.image}`}/></td>
@@ -107,7 +87,8 @@ const [item,setItem] = useState([])
                           <>
                             <td>{categroyItem.name}</td>
                             <td>
-                              <Link to='/'>ویرایش </Link>
+                            {/* <ModalEdit value={item.id}  /> */}
+                            {/* <FormEdit data={item.id}  /> */}
                               <button value={item.id} onClick={handeDelete}>حذف</button>
                             </td>
                           </>
@@ -126,17 +107,6 @@ const [item,setItem] = useState([])
         </div>
 
       }
-    {/* <Box sx={{padding:5}}>
-        <h1>مدیریت کالا</h1>
-        <div style={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-      />
-    </div> 
-    </Box> */}
     </>
   )
 }

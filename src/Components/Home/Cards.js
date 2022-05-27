@@ -16,15 +16,13 @@ export default function Cards(props) {
   const dispatch = useDispatch()
   const cardid = useSelector((state) => state.cardid)
 
-  // if(cardid.cardid >0){
-  //   return <Navigate to="/detail" replace={false}/>
-  // }
+
   return (
     <>
     <Box   sx={{width:{xs:'90%' , sm:'30%' }, display:{xs:'block' , sm:'inline-block;'}}} >
       <Cardstyle  onClick={()=>dispatch(setIdcard(item.id))}>
         <CardActionArea  >
-        <Link to={`/detail/${item.id}`}    state={{ from: item }} >
+        <Link to={`/detail/${item.id}`}     >
           <CardMedia
             component="img"
             height="140"

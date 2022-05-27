@@ -9,7 +9,7 @@ function WithUser(Component) {
         return (
             <>
                 <div><Header /></div>
-                <div>
+                <div >
                     {pathCurrent.pathname === pathCategory ? <Sidebar /> : null}
                 </div>
                 <Component {...props} />
