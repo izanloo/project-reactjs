@@ -22,7 +22,8 @@ const Detail = () => {
     const [category,setcategory] = useState([]);
     const [nameCategory, setNameCategory] = useState({})
     const [count, setCount] = useState(0);
-    
+    const[valueInput,setValueinput] = useState()
+console.log(valueInput)
     useEffect(() => {
         api.get(`/products/${params.productId}`).then(product =>setproducts(product.data))
         .catch(error => console.log(error))
@@ -32,23 +33,17 @@ const Detail = () => {
 
     const categoryId =products.category
 
-<<<<<<< HEAD
-function Detail() {
-  const [categroys, setCategorys] = useState([])
-  const [product, setProduct] = useState([])
-  const[valueInput,setValueinput] = useState()
-  const [massege,setMassage] = useState("")
-  const location = useLocation()
-  const { from } = location.state
-
-  const navigate = useNavigate()
-  function handleAdd() {
-    const a=valueInput
-    console.log(a)
+    useEffect(() => {
+        category.map(categories => {
+            if(categories.id === categoryId) {
+                setNameCategory(categories)
+            }
+        })
+    },[category]);
     
-    product.map((item,i)=>{
-      
-      if(item.id == from.id){
+
+    const handleCount = (e) => {
+        setCount(e.target.value)
         if(valueInput > item.count){
           setMassage("موجودی کم است")
         }
@@ -59,101 +54,6 @@ function Detail() {
           
           // return navigate('/cart')
         }
-        
-      }
-    })
- 
-  }
-
-
-//request for get category name
-  useEffect(() => {
-    axios({
-      url: 'http://localhost:3002/category',
-      method: 'get',
-
-    })
-      .then(function (response) {
-        setCategorys(response.data)
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-  }, [])
-
-
-  useEffect(() => {
-    axios({
-      url: 'http://localhost:3002/products',
-      method: 'get',
-
-    })
-      .then(function (response) {
-        setProduct(response.data)
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-  }, [])
-
-  return (
-    <>
-      {product == null ? <Navigate to='/' /> :
-        <Box textAlign='center' sx={{ display: { xs: 'block', sm: 'flex' }, justifyContent: 'center' }}>
-          {product.map((item, i) => {
-                      
-            if (item.id == from.id) {
-              // setItem(item)
-              return (
-                <>
-                  <Card sx={{ maxWidth: 345, mt: 15 }}>
-                    <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        height="281"
-                        image={`http://localhost:3002${item.thumbnail}`} alt="green iguana"
-                      />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                          {item.name}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                  </Card>
-                  <Box sx={{ paddingTop: { xs: '5%', sm: '15%' }, width: { xs: '100%', sm: '50%' } }} >
-                    <Box>{item.description}</Box>
-                    <Button onClick={handleAdd} variant="contained" color="success">
-                      نهایی کردن خرید
-                    </Button>
-                    <TextFild type="number" min="1" max="100" onChange={(e)=>setValueinput(e.target.value)} />
-                    <Box>موجودی انبار:{item.count}</Box>
-
-                    {massege !=null ? <p>{massege}</p> : null}
-
-                  </Box>
-
-                </>
-             
-              )
-           
-=======
-    useEffect(() => {
-        category.map(categories => {
-            if(categories.id === categoryId) {
-                setNameCategory(categories)
->>>>>>> hotfix3
-            }
-        })
-    },[category]);
-    
-
-    const handleCount = (e) => {
-        setCount(e.target.value)
     }
 
     const maxLengthCheck = (e, countProduct) => {
@@ -163,6 +63,7 @@ function Detail() {
             return e.target.value = 0
         }
     }
+    
     return (
       <Box textAlign='center' sx={{ display: { xs: 'block', sm: 'flex' }, justifyContent: 'center' }}>
 
@@ -185,10 +86,10 @@ function Detail() {
               </Card>
               <Box sx={{ paddingTop: { xs: '5%', sm: '15%' }, width: { xs: '100%', sm: '50%' } }} >
                 <Box>{products.description}</Box>
-                <Button variant="contained" color="success">
+                <TextFild type="number" min="1" max="100" onChange={(e)=>setValueinput(e.target.value)} />
+                <Button variant="contained" color="success"  onClick={handleAdd}>
                   نهایی کردن خرید
                 </Button>
-                <TextFild type="number" min="1" max="100"/>
 
               </Box>
 
