@@ -47,7 +47,8 @@ function Login() {
     .then((res) => {
       if (res.status == 200) {
         Dispatch( login(true))
-       localStorage.setItem(ACCESS_TOKEN,res.data.token)
+
+       localStorage.setItem('ACCESS_TOKEN',res.data.token)
         navigate(redirectaddress,{replace:true})
       }
     })

@@ -3,7 +3,7 @@ import WithAdmin from '../Layouts/WithAdmin'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Modal from '../Components/modal/Modal'
-import ModalEdit from '../Components/modal/ModalEdit'
+import FormEdit from '../Components/modal/FormEdit'
 // import Todo, {ToDoList} from '../Components/Todo'
 
 function Product() {
@@ -32,6 +32,7 @@ function Product() {
 
 
   useEffect(() => {
+    
     axios({
       url: 'http://localhost:3002/category',
       method: 'get',
@@ -87,6 +88,7 @@ function Product() {
                             <td>{categroyItem.name}</td>
                             <td>
                             {/* <ModalEdit value={item.id}  /> */}
+                            {/* <FormEdit data={item.id}  /> */}
                               <button value={item.id} onClick={handeDelete}>حذف</button>
                             </td>
                           </>

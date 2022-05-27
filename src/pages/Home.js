@@ -8,6 +8,7 @@ import { Linkstyle } from "../Assest/Style/abstracts/Stylecomponent";
 import { useDispatch } from 'react-redux';
 import { setProduct } from '../Redux/ProductSlice'
 import Main from '../Components/Home/Main'
+import Carausell from "../Components/Carousel/Carausell";
 
 
 
@@ -52,6 +53,7 @@ function Home() {
 
   return (
     <Box >
+      {/* <Carausell/> */}
       {category == null ? <Navigate to='/' /> :
         category.map((item,i) => (
           <>
