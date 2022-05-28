@@ -42,7 +42,8 @@ function Cart() {
   useEffect(()=>{
     
     // if (typeof window !== "undefined") {
-      const data = localStorage.getItem('item');
+      const data = localStorage.getItem('cart');
+      console.log(data)
       const initialData = data !== null ? JSON.parse(data) : null;
       setProductLocal(initialData) ;
     // }
