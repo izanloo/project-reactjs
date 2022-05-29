@@ -22,13 +22,11 @@ const Detail = () => {
   const [category, setcategory] = useState([]);
   const [nameCategory, setNameCategory] = useState({})
   const [count, setCount] = useState(0);
-  const [newwList, setNewlist] = useState({
-    "hi": "jjj"
-  })
+  const [newwList, setNewlist] = useState({})
   const [valueInput, setValueinput] = useState()
   const [massege, setMassage] = useState("")
 
-  const [perioData,setDataCart] = useState([])
+  const [perioData, setDataCart] = useState([])
   // useEffect(() => {
   //   const previousData = JSON.parse(localStorage.getItem("cart"));
   //   setDataCart(previousData);
@@ -67,21 +65,13 @@ const Detail = () => {
     if (valueInput <= products.count) {
       let items = { 'valueInput': valueInput }
       let newList = Object.assign(products, items)
-      // setCart({...valueCart,newList})
-      // setNewlist(newList) 
-
-      // const previousData = JSON.parse(localStorage.getItem("cart"));
-      // setDataCart({...previousData})
-      if(localStorage.getItem("cart") === null){
+      if (localStorage.getItem("cart") === null) {
         localStorage.setItem('cart', JSON.stringify([newList]));
-        
-      }else{
-  const getCurrentCart = localStorage.getItem('cart');
-    const previousData = JSON.parse(getCurrentCart);
-  // setDataCart(newList);
-  // console.log("ppppp",perioData)
-  localStorage.setItem('cart', JSON.stringify({previousData,...newList}));
-}
+
+      } else {
+        const previousData = JSON.parse(localStorage.getItem("cart"));
+        localStorage.setItem('cart', JSON.stringify([...previousData,newList]));
+      }
 
       // let oldData = JSON.parse(localStorage.getItem('cart'))
 
