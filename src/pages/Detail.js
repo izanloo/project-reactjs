@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
-import Grid from "@mui/material/Grid";
+import { useParams, useNavigate } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
-import NumberFormat from 'react-number-format';
 import Button from "@mui/material/Button";
-import AddLocationIcon from '@mui/icons-material/AddLocation';
-import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
-import BarChartIcon from '@mui/icons-material/BarChart';
 import { api } from '../services/Config'
 import User from '../Layouts/WithUser'
 import Card from '@mui/material/Card';
@@ -21,16 +16,10 @@ const Detail = () => {
   const [products, setproducts] = useState([]);
   const [category, setcategory] = useState([]);
   const [nameCategory, setNameCategory] = useState({})
-  const [count, setCount] = useState(0);
-  const [newwList, setNewlist] = useState({})
   const [valueInput, setValueinput] = useState()
   const [massege, setMassage] = useState("")
 
-  const [perioData, setDataCart] = useState([])
-  // useEffect(() => {
-  //   const previousData = JSON.parse(localStorage.getItem("cart"));
-  //   setDataCart(previousData);
-  // },[])
+  let navigate = useNavigate()
 
   useEffect(() => {
     api.get(`/products/${params.productId}`).then(product => setproducts(product.data))
@@ -50,43 +39,37 @@ const Detail = () => {
   }, [category]);
 
 
-  const handleCount = (e) => {
-    setCount(e.target.value)
-
-  }
-
+console.log(valueInput)
   const handleAdd = () => {
-    if (valueInput > products.count) {
+    if (valueInput > parseInt(products.count)) {
       setMassage("موجودی کم است")
     }
-    // if(valueInput <= 0 ){
-    //   setMassage("عدد وارد شده نادرست است")
-    // }
-    if (valueInput <= products.count) {
+     if(valueInput <= 0 ){
+      setMassage("عدد وارد شده نادرست است")
+    }
+  
+
+    if (valueInput <= parseInt(products.count)) {
       let items = { 'valueInput': valueInput }
       let newList = Object.assign(products, items)
-      if (localStorage.getItem("cart") === null) {
-        localStorage.setItem('cart', JSON.stringify([newList]));
-
-      } else {
-        const previousData = JSON.parse(localStorage.getItem("cart"));
-        localStorage.setItem('cart', JSON.stringify([...previousData,newList]));
+      if (localStorage.getItem("cart")) {
+        const LocalStorage = JSON.parse(localStorage.getItem("cart"));
+        const findItem = LocalStorage.findIndex(i => i.id == newList.id)
+        if (findItem >= 0) {
+          LocalStorage.splice(findItem, 1)
+          localStorage.setItem('cart', JSON.stringify(LocalStorage));
+          const newLocal = JSON.parse(localStorage.getItem("cart"));
+          localStorage.setItem('cart', JSON.stringify([...newLocal, newList]));
+        }
+        localStorage.setItem('cart', JSON.stringify([...LocalStorage, newList]));
       }
-
-      // let oldData = JSON.parse(localStorage.getItem('cart'))
-
-      // localStorage.setItem('cart', JSON.stringify({ ...newList }));
-      // console.log(valueCart)new
-      // return navigate('/cart')
+      else {
+        localStorage.setItem('cart', JSON.stringify([newList]));
+      }
+      return navigate('/cart')
     }
   }
-  // const maxLengthCheck = (e, countProduct) => {
-  //     if (+e.target.value > countProduct) {
-  //         return e.target.value = countProduct
-  //     } else if (e.target.value < 0) {
-  //         return e.target.value = 0
-  //     }
-  // }
+
 
   return (
     <Box textAlign='center' sx={{ display: { xs: 'block', sm: 'flex' }, justifyContent: 'center' }}>
@@ -103,7 +86,6 @@ const Detail = () => {
               {products.name}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -118,15 +100,6 @@ const Detail = () => {
           نهایی کردن خرید
         </Button>
       </Box>
-
-
-
-
-
-
-
-
-
     </Box>
   )
 
