@@ -5,41 +5,48 @@ import { Loginstyle } from '../Assest/Style/abstracts/Stylecomponent';
 import { Box } from '@mui/material';
 import { useSelector,useDispatch } from 'react-redux'
 import {useNavigate} from 'react-router-dom'
+// import persian from "react-date-object/calendars/persian"
+// import persian_fa from "react-date-object/locales/persian_fa"
 
 
 function FinallBuy() {
+
+// const date = new DateObject({ calendar: persian, locale: persian_fa })
+
+// console.log(date.format()) //۱۴۰۰/۰۴/۱۳
+// console.log(date.month.name) //تیر
   const [newUser,setNewuser] =useState({})
   const navigate = useNavigate()
 
   return (
     <Loginstyle>
       <Formik
-        initialValues={{name: '',family:'', address: '',tel:'',dateResive:'' }}
+        initialValues={{firstName: '',lastName:'', Address: '',phone:'',dateResive:'' }}
         validate={values => {
           let errors = {};
-          if (!values.name) {
-            errors.name = 'Required';
+          if (!values.firstName) {
+            errors.firstName = 'Required';
           }
           else{
-              setNewuser({ ...newUser, 'name':values.name })
+              setNewuser({ ...newUser, 'firstName':values.firstName })
           }
-          if (!values.family) {
-            errors.family = 'Required';
+          if (!values.lastName) {
+            errors.lastName = 'Required';
           }
           else{
-            setNewuser({ ...newUser, 'family':values.family })
+            setNewuser({ ...newUser, 'lastName':values.lastName })
         }
-          if (!values.address) {
-            errors.address = 'Required';
+          if (!values.Address) {
+            errors.Address = 'Required';
           }
           else{
-            setNewuser({ ...newUser, 'address':values.address })
+            setNewuser({ ...newUser, 'Address':values.Address })
         }
-          if (!values.tel) {
-            errors.tel = 'Required';
+          if (!values.phone) {
+            errors.phone = 'Required';
           }
           else{
-            setNewuser({ ...newUser, 'tel':values.tel })
+            setNewuser({ ...newUser, 'phone':values.phone })
         }
           if (!values.dateResive) {
             errors.dateResive = 'Required';
@@ -50,12 +57,12 @@ function FinallBuy() {
          console.log(newUser) 
         }}
         onSubmit={(values) => {
-          if (localStorage.getItem("userBuy") === null) {
-            localStorage.setItem('userBuy', JSON.stringify([newUser]));
+          if (localStorage.getItem("customer") === null) {
+            localStorage.setItem('customer', JSON.stringify([newUser]));
     
           } else {
-            const previousData = JSON.parse(localStorage.getItem("userBuy"));
-            localStorage.setItem('userBuy', JSON.stringify([...previousData,newUser]));
+            const previousData = JSON.parse(localStorage.getItem("customer"));
+            localStorage.setItem('customer', JSON.stringify([...previousData,newUser]));
           }
           return navigate('/payment')
         }}
@@ -67,57 +74,57 @@ function FinallBuy() {
               <div className="field">
                 <input
                   type="text"
-                  name="name"
+                  name="firstName"
                   className='w-100 p-1'
                   placeholder="نام "
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  value={props.values.name}
+                  value={props.values.firstName}
                 />
               </div>
               <p className="error">
-                {props.errors.name && props.touched.name && props.errors.name}
+                {props.errors.firstName && props.touched.firstName && props.errors.firstName}
               </p>
               <div className="field">
                 <input
                   type="text"
-                  name="family"
+                  name="lastName"
                   className='w-100 p-1'
                   placeholder="نام خانوادگی "
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  value={props.values.family}
+                  value={props.values.lastName}
                 />
               </div>
               <p className="error">
-                {props.errors.family && props.touched.family && props.errors.family}
+                {props.errors.lastName && props.touched.lastName && props.errors.lastName}
               </p>
               <div className="field">
                 <input
-                  name="address"
+                  name="Address"
                   placeholder=" آدرس"
                   className='w-100 position-relative mt-4 p-1 mb-1'
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  value={props.values.address}
+                  value={props.values.Address}
                 />
               </div>
                 <p className="error">
-                  {props.errors.address && props.touched.address && props.errors.address}
+                  {props.errors.Address && props.touched.Address && props.errors.Address}
                 </p>
                 <div className="field">
                 <input
-                  name="tel"
-                  type="tel"
+                  name="phone"
+                  type="phone"
                   placeholder=" تلفن همراه"
                   className='w-100 position-relative mt-4 p-1 mb-1'
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  value={props.values.address}
+                  value={props.values.phone}
                 />
               </div>
                 <p className="error">
-                  {props.errors.address && props.touched.address && props.errors.address}
+                  {props.errors.phone && props.touched.Address && props.errors.phone}
                 </p>
                 <div className="field">
                 <input
@@ -126,8 +133,9 @@ function FinallBuy() {
                   className='w-100 position-relative mt-4 p-1 mb-1'
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  value={props.values.address}
+                  value={props.values.dateResive}
                 />
+                
               </div>
                 <p className="error">
                   {props.errors.dateResive && props.touched.dateResive && props.errors.dateResive}

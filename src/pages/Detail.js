@@ -9,14 +9,15 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { TextFild } from '../Assest/Style/abstracts/Stylecomponent'
 import { CardActionArea } from '@mui/material';
+import {DeleteItem} from './Cart'
 
 
 const Detail = () => {
   let params = useParams();
   const [products, setproducts] = useState([]);
   const [category, setcategory] = useState([]);
-  const [nameCategory, setNameCategory] = useState({})
   const [valueInput, setValueinput] = useState()
+  const [nameCategory, setNameCategory] = useState({})
   const [massege, setMassage] = useState("")
 
   let navigate = useNavigate()
@@ -50,7 +51,7 @@ console.log(valueInput)
   
 
     if (valueInput <= parseInt(products.count)) {
-      let items = { 'valueInput': valueInput }
+      let items = { 'valueInput': valueInput , 'delete': 'حذف'}
       let newList = Object.assign(products, items)
       if (localStorage.getItem("cart")) {
         const LocalStorage = JSON.parse(localStorage.getItem("cart"));

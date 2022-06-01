@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect,useState } from 'react';
 import WithUser from '../Layouts/WithUser'
 import { useNavigate } from 'react-router-dom'
 import { DataGrid } from '@mui/x-data-grid';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-
 import Snackbar from '@mui/material/Snackbar';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Alert from '@mui/material/Alert';
+import { api } from '../services/Config'
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const useFakeMutation = () => {
   return React.useCallback(
@@ -40,6 +41,12 @@ function computeMutation(newRow, oldRow) {
 
 
 function Cart() {
+  const [product,setProducts] = useState([])
+  useEffect(() => {
+    api.get(`/products`).then(res => setProducts(res.data))
+      .catch(error => console.log(error))
+
+  }, [])
   const mutateRow = useFakeMutation();
   const noButtonRef = React.useRef(null);
   const [promiseArguments, setPromiseArguments] = React.useState(null);
@@ -70,7 +77,28 @@ function Cart() {
 
   const handleYes = async () => {
     const { newRow, oldRow, reject, resolve } = promiseArguments;
-
+    product.map((item,i)=>
+    {
+      if(item.id == newRow.id){
+        if (newRow.valueInput > parseInt(item.count)) {
+          alert("موجودی کم است")
+        }
+         if(newRow.valueInput <= 0 ){
+          alert("عدد وارد شده نادرست است")
+        }
+        if (newRow.valueInput <= parseInt(item.count)) {
+          const LocalStorage = JSON.parse(localStorage.getItem("cart"));
+          const findItem = LocalStorage.findIndex(i => i.id == newRow.id)
+          if (findItem >= 0) {
+            LocalStorage.splice(findItem, 1)
+            localStorage.setItem('cart', JSON.stringify(LocalStorage));
+            const newLocal = JSON.parse(localStorage.getItem("cart"));
+            localStorage.setItem('cart', JSON.stringify([...newLocal, newRow]));
+          }
+        }
+      }
+    }
+    )
     try {
       // Make the HTTP request to save in the backend
       const response = await mutateRow(newRow);
@@ -125,7 +153,7 @@ function Cart() {
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
     { field: 'name', headerName: 'نام کالا', width: 150 },
-    { field: 'valueInput', headerName: 'تعداد', width: 70 , editable: true  },
+    { field: 'valueInput', headerName: 'تعداد', width: 70, editable: true },
     {
       field: 'price',
       headerName: 'قیمت',
@@ -146,6 +174,8 @@ function Cart() {
   function handlePyment() {
     return navigate('/finalbuy')
   }
+  let [arr,setArr] = useState([])
+ 
   return (
     <Box sx={{ padding: 5 }}>
       <h1>سبد خرید</h1>
@@ -169,6 +199,7 @@ function Cart() {
                 </Snackbar>
               )}
             </div>
+            
           </>
 
 
@@ -184,14 +215,16 @@ function Cart() {
         <>
           {Object.values(productLocal).map(item => {
             let count = []
-            let arr = [{}]
             count = parseInt(item.valueInput) * parseInt(item.price)
+          //  setArr({...arr,count})
+            // console.log(arr)
           }
           )}
 
         </>
 
       }
+
     </Box>
   )
 }

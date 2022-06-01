@@ -32,6 +32,7 @@ export default function AppRouter() {
         <Route path='/category' element={<Category />} />
         <Route path='/finalbuy' element={<FinallBuy />} />
         <Route path='/payment' element={<Payment />} />
+        <Route path='/resultPay' element={<ResaultPay />} />
         <Route path="/pagination" element={<Pagination/>} />
 
         <Route path='/paneladmin' element={<PanelAdmin />} />
