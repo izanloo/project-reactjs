@@ -61,6 +61,9 @@ function FinallBuy() {
             localStorage.setItem('customer', JSON.stringify([newUser]));
     
           } else {
+            // localStorage.removeItem("customer")
+            // localStorage.setItem('customer', JSON.stringify([newUser]));
+
             const previousData = JSON.parse(localStorage.getItem("customer"));
             localStorage.setItem('customer', JSON.stringify([...previousData,newUser]));
           }

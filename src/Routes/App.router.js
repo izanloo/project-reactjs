@@ -12,7 +12,6 @@ import Product from '../pages/Product';
 import Inventory from '../pages/Inventory'
 import Orders from '../pages/Orders'
 import Notfound from '../pages/Notfound'
-import ResaultPay from '../pages/ResaultPay'
 import Protected from './Protected.route';
 import WaitingOrder from '../Components/WaitingOrder';
 import Resived from '../pages/Resived';
@@ -32,12 +31,10 @@ export default function AppRouter() {
         <Route path='/category' element={<Category />} />
         <Route path='/finalbuy' element={<FinallBuy />} />
         <Route path='/payment' element={<Payment />} />
-        <Route path='/resultPay' element={<ResaultPay />} />
         <Route path="/pagination" element={<Pagination/>} />
 
         <Route path='/paneladmin' element={<PanelAdmin />} />
         <Route path='/paneladmin/product' element={<Protected element={<Product />} />} />
-        <Route path='/paneladmin/resaultPay' element={<Protected element={<ResaultPay />} />} />
         <Route path='/paneladmin/payment' element={<Protected element={<Payment />} />} />
         <Route path='/' element={<OutletOrder/>}>
           <Route path='/paneladmin/orders' element={<Protected element={<Orders />} />} />
