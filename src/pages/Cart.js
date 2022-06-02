@@ -43,6 +43,8 @@ function computeMutation(newRow, oldRow) {
 
 function Cart() {
   const [product, setProducts] = useState([])
+  
+  
   useEffect(() => {
     api.get(`/products`).then(res => setProducts(res.data))
       .catch(error => console.log(error))
@@ -149,26 +151,14 @@ function Cart() {
 
 
   const [productLocal, setProductLocal] = useState([])
-  const [plus, setPlus] = useState([])
-  // const columns = [
-  //   { field: 'id', headerName: 'ID', width: 70 },
-  //   { field: 'name', headerName: 'نام کالا', width: 150 },
-  //   { field: 'valueInput', headerName: 'تعداد', width: 70, editable: true },
-  //   {
-  //     field: 'price',
-  //     headerName: 'قیمت',
-  //     type: 'number',
-  //     width: 70,
-  //   },
-  //   { field: 'delete', headerName: 'حذف', width: 70 },
+  const [rows, setRows] = React.useState([]);
 
-
-  // ];
-
+ 
   useEffect(() => {
     const data = localStorage.getItem('cart');
     const initialData = data !== null ? JSON.parse(data) : null;
     setProductLocal(initialData);
+    setRows(initialData)
   }, [])
   const navigate = useNavigate()
   function handlePyment() {
@@ -180,48 +170,30 @@ function Cart() {
     (id) => () => {
       setTimeout(() => {
         setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+        if (localStorage.getItem("cart")) {
+          const LocalStorage = JSON.parse(localStorage.getItem("cart"));
+          const findItem = LocalStorage.findIndex(i => i.id == id)
+          if (findItem >= 0) {
+            LocalStorage.splice(findItem, 1)
+            localStorage.setItem('cart', JSON.stringify(LocalStorage));
+          }
+        }
       });
     },
     [],
   );
   const columns = React.useMemo(
     () => [
-      { field: 'name', type: 'string' },
-      { field: 'age', type: 'number' },
-      { field: 'lastLogin', type: 'dateTime', width: 180 },
-      { field: 'isAdmin', type: 'boolean', width: 120 },
-      {
-        field: 'country',
-        type: 'singleSelect',
-        width: 120,
-        valueOptions: [
-          'Bulgaria',
-          'Netherlands',
-          'France',
-          'United Kingdom',
-          'Spain',
-          'Brazil',
-        ],
-      },
-      {
-        field: 'discount',
-        type: 'singleSelect',
-        width: 120,
-        editable: true,
-        valueOptions: ({ row }) => {
-          if (row === undefined) {
-            return ['EU-resident', 'junior'];
-          }
-          const options = [];
-          if (!['United Kingdom', 'Brazil'].includes(row.country)) {
-            options.push('EU-resident');
-          }
-          if (row.age < 27) {
-            options.push('junior');
-          }
-          return options;
-        },
-      },
+     
+        { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'name', headerName: 'نام کالا', width: 150 },
+    { field: 'valueInput', headerName: 'تعداد', width: 70, editable: true },
+    {
+      field: 'price',
+      headerName: 'قیمت',
+      type: 'number',
+      width: 70,
+    },
       {
         field: 'actions',
         type: 'actions',
@@ -237,7 +209,7 @@ function Cart() {
     ],
     [deleteUser],
   );
-
+console.log(rows)
   return (
     <Box sx={{ padding: 5 }}>
       <h1>سبد خرید</h1>
@@ -248,7 +220,7 @@ function Cart() {
               {renderConfirmDialog()}
 
               <DataGrid
-                rows={productLocal}
+                rows={rows}
                 columns={columns}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
@@ -272,7 +244,7 @@ function Cart() {
           {productLocal.map(item => {
             arr = [...arr, parseInt(item.valueInput) * parseInt(item.price)]
             sum = arr.reduce((x, y) => x + y);
-            
+
 
           }
           )}
@@ -281,7 +253,7 @@ function Cart() {
 
       }
       <h2>جمع:
-        {sum == null ? "0" : <span>{sum}</span>}
+        {sum == null ? "0" : <span>{sum} </span>}
         تومان
       </h2>
       <Button onClick={handlePyment} variant="contained" color="success">
