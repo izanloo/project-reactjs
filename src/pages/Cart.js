@@ -1,7 +1,7 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState,useMemo } from 'react';
 import WithUser from '../Layouts/WithUser'
 import { useNavigate } from 'react-router-dom'
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Snackbar from '@mui/material/Snackbar';
@@ -12,6 +12,7 @@ import DialogActions from '@mui/material/DialogActions';
 import Alert from '@mui/material/Alert';
 import { api } from '../services/Config'
 import DeleteIcon from '@mui/icons-material/Delete';
+
 
 const useFakeMutation = () => {
   return React.useCallback(
@@ -41,7 +42,7 @@ function computeMutation(newRow, oldRow) {
 
 
 function Cart() {
-  const [product,setProducts] = useState([])
+  const [product, setProducts] = useState([])
   useEffect(() => {
     api.get(`/products`).then(res => setProducts(res.data))
       .catch(error => console.log(error))
@@ -77,13 +78,12 @@ function Cart() {
 
   const handleYes = async () => {
     const { newRow, oldRow, reject, resolve } = promiseArguments;
-    product.map((item,i)=>
-    {
-      if(item.id == newRow.id){
+    product.map((item, i) => {
+      if (item.id == newRow.id) {
         if (newRow.valueInput > parseInt(item.count)) {
           alert("موجودی کم است")
         }
-         if(newRow.valueInput <= 0 ){
+        if (newRow.valueInput <= 0) {
           alert("عدد وارد شده نادرست است")
         }
         if (newRow.valueInput <= parseInt(item.count)) {
@@ -150,20 +150,20 @@ function Cart() {
 
   const [productLocal, setProductLocal] = useState([])
   const [plus, setPlus] = useState([])
-  const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'name', headerName: 'نام کالا', width: 150 },
-    { field: 'valueInput', headerName: 'تعداد', width: 70, editable: true },
-    {
-      field: 'price',
-      headerName: 'قیمت',
-      type: 'number',
-      width: 70,
-    },
-    { field: 'delete', headerName: 'حذف', width: 70 },
+  // const columns = [
+  //   { field: 'id', headerName: 'ID', width: 70 },
+  //   { field: 'name', headerName: 'نام کالا', width: 150 },
+  //   { field: 'valueInput', headerName: 'تعداد', width: 70, editable: true },
+  //   {
+  //     field: 'price',
+  //     headerName: 'قیمت',
+  //     type: 'number',
+  //     width: 70,
+  //   },
+  //   { field: 'delete', headerName: 'حذف', width: 70 },
 
 
-  ];
+  // ];
 
   useEffect(() => {
     const data = localStorage.getItem('cart');
@@ -174,8 +174,70 @@ function Cart() {
   function handlePyment() {
     return navigate('/finalbuy')
   }
-  let [arr,setArr] = useState([])
- 
+  let [arr, setArr] = useState([])
+  let sum
+  const deleteUser = React.useCallback(
+    (id) => () => {
+      setTimeout(() => {
+        setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+      });
+    },
+    [],
+  );
+  const columns = React.useMemo(
+    () => [
+      { field: 'name', type: 'string' },
+      { field: 'age', type: 'number' },
+      { field: 'lastLogin', type: 'dateTime', width: 180 },
+      { field: 'isAdmin', type: 'boolean', width: 120 },
+      {
+        field: 'country',
+        type: 'singleSelect',
+        width: 120,
+        valueOptions: [
+          'Bulgaria',
+          'Netherlands',
+          'France',
+          'United Kingdom',
+          'Spain',
+          'Brazil',
+        ],
+      },
+      {
+        field: 'discount',
+        type: 'singleSelect',
+        width: 120,
+        editable: true,
+        valueOptions: ({ row }) => {
+          if (row === undefined) {
+            return ['EU-resident', 'junior'];
+          }
+          const options = [];
+          if (!['United Kingdom', 'Brazil'].includes(row.country)) {
+            options.push('EU-resident');
+          }
+          if (row.age < 27) {
+            options.push('junior');
+          }
+          return options;
+        },
+      },
+      {
+        field: 'actions',
+        type: 'actions',
+        width: 80,
+        getActions: (params) => [
+          <GridActionsCellItem
+            icon={<DeleteIcon />}
+            label="Delete"
+            onClick={deleteUser(params.id)}
+          />
+        ],
+      },
+    ],
+    [deleteUser],
+  );
+
   return (
     <Box sx={{ padding: 5 }}>
       <h1>سبد خرید</h1>
@@ -199,37 +261,36 @@ function Cart() {
                 </Snackbar>
               )}
             </div>
-            
+
           </>
 
 
         }
       </div>
-      <h2>جمع:
-        <span>1040030 تومان</span>
-      </h2>
-      <Button onClick={handlePyment} variant="contained" color="success">
-        نهایی کردن خرید
-      </Button>
       {productLocal == null ? "loading" :
         <>
-          {Object.values(productLocal).map(item => {
-            let count = []
-            count = parseInt(item.valueInput) * parseInt(item.price)
-          //  setArr({...arr,count})
-            // console.log(arr)
+          {productLocal.map(item => {
+            arr = [...arr, parseInt(item.valueInput) * parseInt(item.price)]
+            sum = arr.reduce((x, y) => x + y);
+            
+
           }
           )}
 
         </>
 
       }
+      <h2>جمع:
+        {sum == null ? "0" : <span>{sum}</span>}
+        تومان
+      </h2>
+      <Button onClick={handlePyment} variant="contained" color="success">
+        نهایی کردن خرید
+      </Button>
+
 
     </Box>
   )
 }
 export default WithUser(Cart)
-
-
-
 

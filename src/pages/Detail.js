@@ -51,7 +51,7 @@ console.log(valueInput)
   
 
     if (valueInput <= parseInt(products.count)) {
-      let items = { 'valueInput': valueInput , 'delete': 'حذف'}
+      let items = { 'valueInput': valueInput }
       let newList = Object.assign(products, items)
       if (localStorage.getItem("cart")) {
         const LocalStorage = JSON.parse(localStorage.getItem("cart"));
