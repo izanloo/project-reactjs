@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { setOrder } from '../Redux/orderSlice'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
+import ModalStatus from './modal/ModalStatus';
 
 export default function WaitingOrder() {
   const order = useSelector((state) => state.order)
@@ -45,7 +46,7 @@ export default function WaitingOrder() {
                     <td>{item.customerDetail.firstName}<span style={{ paddingRight: '3px' }}>{item.customerDetail.lastName}</span></td>
                     <td>{item.purchaseTotal}</td>
                     <td>{item.orderDate}</td>
-                    <td>بررسی سفارش</td>
+                    <td><ModalStatus item={item}/></td>
                   </tr>
                 </>)
             }

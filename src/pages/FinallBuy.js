@@ -49,7 +49,8 @@ function FinallBuy() {
         lastName: values.lastName,
         phone: values.phone,
         billingAddress: values.billingAddress,
-        "delivery":  values.dateDeliver,     
+        "delivery":  values.dateDeliver,  
+   
       };
 
 

@@ -41,7 +41,10 @@ function Payment() {
         customerDetail,
         orderItems,
         "orderStatus": 1,
-        "delivery":LocalStorage[0].delivery
+        "delivery":LocalStorage[0].delivery,
+        "purchaseTotal": "200,000",
+        "orderDate": 1643396897495,
+
       },
 
     })
