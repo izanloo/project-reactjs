@@ -4,29 +4,22 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { Box } from '@mui/system';
-import { Cardstyle } from '../../Assest/Style/abstracts/Stylecomponent';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux'
-import { setIdcard } from '../../Redux/CardidSlice'
 import { Link } from "react-router-dom";
-
+import { useSelector} from 'react-redux';
+import { Cardstyle } from '../../Assest/Style/abstracts/Stylecomponent';
+import {baseURL} from '../../services/Config'
 
 export default function Cards(props) {
   const { item } = props
-  const dispatch = useDispatch()
-  const cardid = useSelector((state) => state.cardid)
-
-
   return (
     <>
     <Box   sx={{width:{xs:'90%' , sm:'30%' }, display:{xs:'block' , sm:'inline-block;'}}} >
-      <Cardstyle  onClick={()=>dispatch(setIdcard(item.id))}>
+      <Cardstyle >
         <CardActionArea  >
         <Link to={`/detail/${item.id}`}     >
           <CardMedia
             component="img"
-            height="140"
-            image={`http://localhost:3002/files/${item.image}`}
+            image={`${baseURL}/files/${item.image}`}
             alt="دمنوش گیاهی"
           />
               </Link>

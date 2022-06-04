@@ -80,7 +80,7 @@ console.log(valueInput)
           <CardMedia
             component="img"
             height="281"
-            image={`http://localhost:3002/files/${products.images}`} alt="green iguana"
+            image={`http://localhost:3002/files/${products.image}`} alt="green iguana"
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">

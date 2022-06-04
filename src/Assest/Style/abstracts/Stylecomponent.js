@@ -3,12 +3,15 @@ import { Link } from 'react-router-dom'
 import AppBar from '@mui/material/AppBar';
 import Card from '@mui/material/Card';
 import { Box } from '@mui/material';
+import Typography from '@mui/material/Typography';
+
 
 
 const Appstyle = styled('div')`
     a{
         text-decoration:none;
     }
+   font-family: 'Iranian Sans', sans-serif !important
 `
 export { Appstyle }
 
@@ -192,3 +195,31 @@ input[type="submit"]:active {
 
 `
 export { ModalStyle }
+
+
+
+
+
+const CarouselStyle = styled(Box)`
+div{
+    
+  height: 20pc;
+  width: 100%;
+  border-radius: 10px;
+  background-size: cover;
+  .img1{
+    background: url("https://i.pinimg.com/originals/b6/88/45/b68845a212688ba060337267ba240746.jpg");
+
+  }
+}
+  
+  
+`
+export { CarouselStyle }
+
+const TitleStyle = styled(Typography)`
+margin-right: 41px !important;
+margin-bottom: 10px !important;
+margin-top: 32px !important;
+`
+export { TitleStyle }
