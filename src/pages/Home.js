@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import {  Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import WithUser from '../Layouts/WithUser'
 import axios from 'axios'
-import {api} from '../services/Config'
+import { api } from '../services/Config'
 import { Box } from "@mui/material";
 import { Linkstyle } from "../Assest/Style/abstracts/Stylecomponent";
 import { useDispatch } from 'react-redux';
 import { setProduct } from '../Redux/ProductSlice'
 import Main from '../Components/Home/Main'
+import Typography from '@mui/material/Typography';
 import Carausell from "../Components/Carousel/Carausell";
 
 
@@ -55,12 +56,12 @@ function Home() {
     <Box >
       {/* <Carausell/> */}
       {category == null ? <Navigate to='/' /> :
-        category.map((item,i) => (
+        category.map((item, i) => (
           <>
-            <Linkstyle to='/category'   state={{ from: item }}>
-             <h2> {item.name}</h2>
+            <Linkstyle to='/category' state={{ from: item }}>
+              <Typography variant="h1" component="h2">{item.name}</Typography>
             </Linkstyle>
-            <Main idCategory={item.id} key={item.id} sx={{color:'red'}} /></>
+            <Main idCategory={item.id} key={item.id} sx={{ color: 'red' }} /></>
         ))
       }
     </Box>
