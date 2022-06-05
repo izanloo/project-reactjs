@@ -31,15 +31,13 @@ export default function AppRouter() {
         <Route path='/category' element={<Category />} />
         <Route path='/finalbuy' element={<FinallBuy />} />
         <Route path='/payment' element={<Payment />} />
-        <Route path="/pagination" element={<Pagination/>} />
+        <Route path="/pagination" element={<Pagination />} />
 
         <Route path='/paneladmin' element={<PanelAdmin />} />
         <Route path='/paneladmin/product' element={<Protected element={<Product />} />} />
         <Route path='/paneladmin/payment' element={<Protected element={<Payment />} />} />
-        <Route path='/' element={<OutletOrder/>}>
-          <Route path='/paneladmin/orders' element={<Protected element={<Orders />} />} />
-          <Route path='/paneladmin/orders/resived' element={<Protected element={<Resived />} />} />
-        </Route>
+        <Route path='/paneladmin/orders' element={<Protected element={<Orders />} />} />
+        <Route path='/paneladmin/orders/resived' element={<Protected element={<Resived />} />} />
         <Route path='/paneladmin/inventory' element={<Protected element={<Inventory />} />} />
 
 
