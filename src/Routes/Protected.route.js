@@ -1,25 +1,15 @@
-import React, { Children, useEffect, useState } from 'react';
-import { Navigate,useLocation } from "react-router-dom";
-import { useSelector } from 'react-redux'
+
+import React from 'react';
+import { Navigate, useLocation } from "react-router-dom";
+
 function Protected({ element }) {
-  let  localstorage=localStorage.getItem('ACCESS_TOKEN')
-    // const state = useSelector((state) => {
-    //     return state.admin.isLogin
-    // })
-    console.log(localstorage)
 
+    const Localstorage = localStorage.getItem('isLogin')
+    const location = useLocation()
+    if (!Localstorage) {
+        return <Navigate to="/login" state={{ from: location }} replace />
+    }
 
-    // function cheklogin() {
-    //     // setIslogin(true)
-    // }
-    // console.log(state);
-    const location=useLocation()
-if(localstorage ==null){
-    return <Navigate to="/login" state={{from:location}}replace />
-}
-        
-return (
-    element   
-     )
+    return element
 }
 export default Protected;

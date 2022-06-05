@@ -37,7 +37,7 @@ const ResponsiveAppBar = () => {
             <Box
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
-              <Link to='/login' style={{ paddingLeft: 13 }} >{pages[0]}</Link>
+              <Link to='/paneladmin/orders' style={{ paddingLeft: 13 }} >{pages[0]}</Link>
               <Link to='/cart' style={{ paddingLeft: 13 }} ><BiCart />{pages[1]}</Link>
 
             </Box>

@@ -41,19 +41,21 @@ function Login() {
           }
           return errors;
         }}
-        onSubmit={(values) => {
+   
+        onSubmit={values => {
           axios
           .post('http://localhost:3002/auth/login',values)
     .then((res) => {
       if (res.status == 200) {
         Dispatch( login(true))
 
-       localStorage.setItem('ACCESS_TOKEN',res.data.token)
+       localStorage.setItem("token",res.data.token)
+       localStorage.setItem("isLogin",true)
         navigate(redirectaddress,{replace:true})
       }
     })
     .catch(() => {
-      alert("با این نام کاربری کاربری ثبت نشده");
+      alert("نام کاربری و یا رمز عبور اشتباه است");
     });
         }}
       >
