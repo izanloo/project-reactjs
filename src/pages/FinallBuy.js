@@ -8,6 +8,7 @@ import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import DateObject from "react-date-object";
 import { useSelector, useDispatch } from "react-redux";
+import { FormStyle } from '../Assest/Style/abstracts/Stylecomponent';
 
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -69,8 +70,9 @@ function FinallBuy() {
   //  } 
 
   return (
-      <form onSubmit={formik.handleSubmit}>
-        <Grid container sx={{ m: 8 }}>
+    // <FormStyle>
+       <form onSubmit={formik.handleSubmit} >
+        <Grid container sx={{ m: 8 ,display:'block'}}>
           <Grid
             item
             xs={6}
@@ -250,6 +252,7 @@ function FinallBuy() {
           پرداخت
         </Button>
       </form>
+      // </FormStyle>
   );
 }
 export default WithUser(FinallBuy);

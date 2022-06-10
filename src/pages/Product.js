@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import WithAdmin from '../Layouts/WithAdmin'
-import axios from 'axios'
-import { Link } from 'react-router-dom'
-import Modal from '../Components/modal/Modal'
-import FormEdit from '../Components/modal/FormEdit'
-// import Todo, {ToDoList} from '../Components/Todo'
+import WithAdmin from '../Layouts/WithAdmin';
+import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
+import DeleteIcon from '@mui/icons-material/Delete';
+import axios from 'axios';
+import Modal from '../Components/modal/Modal';
+import {api} from '../services/Config'
+import ModalEdit from '../Components/modal/ModalEdit';
 
 function Product() {
   const [product, setProduct] = useState([])
@@ -12,102 +13,112 @@ function Product() {
   const url = 'http://localhost:3002/products';
 
 
-  function getProduct(){
-    axios({
-      url: url,
-      method: 'get',
-      // params: {
-      //   token: 'TOP-SECRET'
-      // }
-    })
-      .then(function (response) {
-        setProduct(response.data)
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
 
+
+  async function getProduct() {
+    try {
+      const products = await api.get("/products");
+      const category = await api.get("/category");
+      setProduct(products.data);
+      setCategorys(category.data);
+    } catch (error) {
+      console.log(error);
+    }
   }
-  useEffect(() => {getProduct() }, [])
+
+  useEffect(() => { getProduct() }, [])
 
 
-  useEffect(() => {
-    
-    axios({
-      url: 'http://localhost:3002/category',
-      method: 'get',
+  const deleteUser = React.useCallback(
+    (id) => () => {
+      setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+      const request = axios.delete(`http://localhost:3002/products/${id}`)
+    },
+    [],
+  );
 
-    })
-      .then(function (response) {
-        setCategorys(response.data)
+
+
+
+  let [rows, setRows] = useState([]);
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'name', headerName: 'نام محصول', width: 150 },
+    {
+      field: 'image',
+      headerName: 'Image',
+      width: 150,
+      renderCell: (params) => <img className='productImg' src={params.value} />, // renderCell will render the component
+    },
+    { field: 'category', headerName: ' دسته بندی', width: 150 },
+    {
+      field: 'actions',
+      type: 'actions',
+      width: 80,
+      getActions: (params) => [
+        <GridActionsCellItem
+          icon={<DeleteIcon />}
+          label="Delete"
+          onClick={deleteUser(params.id)}
+        />
+      ],
+    },
+    // {
+    //   field: 'actions',
+    //   type: 'actions',
+    //   width: 80,
+    //   getActions: (params) => [
+    //     <ModalEdit
+    //       // icon={<DeleteIcon />}
+    //       // label="Edite"
+    //       // onClick={Edit(params.id)}
+    //     />
+    //   ],
+    // },
+  ]
+// function Edit(id){
+//   console.log(id)
+// }
+
+  rows = product.map(item => {
+    const container = {};
+    container['id'] = item.id;
+    container['name'] = item.name;
+    container['image'] = `http://localhost:3002/files/${item.image}`;
+    {
+      categroys.map(categroyItem => {
+        if (categroyItem.id == item.category) {
+          container['category'] = categroyItem.name;
+        }
       })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-
-
-
-  }, [])
-
-    const handeDelete = (e)=>{
-     const id=e.target.value
-     const request = axios.delete(`http://localhost:3002/products/${id}`)
-     return request.then(getProduct())
     }
 
+    return container;
+  })
 
-    const getId = (e)=>{
-      const id=e.target.value
-      console.log("jjjj",id)
-     }
+
   return (
     <>
-  
-    {/* <Todo/> */}
-<Modal/>
+      <Modal />
       <h2>مدیریت کالاها</h2>
-      {product  == null ? "loding" :
-        <div>
-          <table dir="rtl">
-            <tr>
-              <th>تصویر</th>
-              <th>نام کالا</th>
-              <th>دسته بندی</th>
-              <th>لینک</th>
-            </tr>
-            {product.map((item,i) => {
-                return (
-                  <tr key={i}>
-                    <td><img className='productImg' src={`http://localhost:3002/files/${item.image}`}/></td>
-                    <td>{item.name}</td>
-                    {categroys.map(categroyItem => {
-                      if (categroyItem.id == item.category) {
-                        return (
-                          <>
-                            <td>{categroyItem.name}</td>
-                            <td>
-                            {/* <ModalEdit value={item.id}  /> */}
-                            {/* <FormEdit data={item.id}  /> */}
-                              <button value={item.id} onClick={handeDelete}>حذف</button>
-                            </td>
-                          </>
+      <div style={{ height: 400, width: '100%' }}>
+        {product == null ? "هیچ کالایی انتخاب نشده است" :
+          <>
+            <div style={{ height: 400, width: '100%' }}>
+              <DataGrid
+                rows={rows}
+                columns={columns}
+                pageSize={5}
+                rowsPerPageOptions={[5]}
+                rowHeight={100}
+              />
 
-                        )
-                      }
-
-                    })}
-                  </tr>
-                )
-          
-          })}
-          </table>
-
-
-        </div>
-
-      }
+            </div>
+          </>
+        }
+      </div>
     </>
   )
 }
 export default WithAdmin(Product)
+

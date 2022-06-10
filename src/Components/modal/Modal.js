@@ -38,7 +38,7 @@ export default function ResponsiveDialog() {
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-<InputModal />
+<InputModal handleClose={handleClose}/>
           </DialogContentText>
         </DialogContent>
         <DialogActions>

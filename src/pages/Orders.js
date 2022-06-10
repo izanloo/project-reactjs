@@ -11,12 +11,8 @@ function Orders() {
   }
   return (
     <>
-      <Box onChange={onChangeValue} m={5}>
-        <input type="radio" name="orderRadio" value="waiting" />سفارش های در حال انتظار
-        <input type="radio" name="orderRadio" value="resive" />سفارش های تحویل داده شده
-      </Box>
-      {valueRadio == "waiting" ? <WaitingOrder /> : <Resived />}
+      <WaitingOrder />
     </>
   )
 }
-export default WithAdmin(Orders)
+export default Orders

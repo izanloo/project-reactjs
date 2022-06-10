@@ -7,6 +7,7 @@ import { ArrowBack } from '@mui/icons-material';
 import { Link } from '@mui/material';
 import CancelPayment from './CancelPayment';
 import { useNavigate, useSearchParams } from "react-router-dom";
+import PaymentSuccess from '../Components/PaymentSuccess';
 
 
 
@@ -50,6 +51,9 @@ function Payment() {
     })
       .then(function (response) {
         console.log(response)
+        localStorage.removeItem("cart");    
+        localStorage.removeItem("customer");    
+
       })
       .catch(function (error) {
         console.log(error);
@@ -61,13 +65,16 @@ function Payment() {
     if(statusPayment == 'success'){
       successPayment()
     }
+    if(statusPayment == 'fail'){
+      localStorage.removeItem("cart");    
+      localStorage.removeItem("customer");       }
   }
 useEffect(()=>{getStatus()},[])
   const [searchParams, setSearchParams] = useSearchParams();
 
   return (
     <>
-            {searchParams.get("status") == "success" ? "با موفقیت پرداخت شد" :"کنسل شد"}
+            {searchParams.get("status") == "success" ? <PaymentSuccess/> :"کنسل شد"}
     </>
   )
 }

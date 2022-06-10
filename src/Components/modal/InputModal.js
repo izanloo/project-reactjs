@@ -15,6 +15,7 @@ import axios from 'axios'
 import { setCategoryId } from '../../Redux/CategoryIdSlice'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux'
+import {Navigate} from 'react-router-dom'
 
 
 
@@ -107,7 +108,8 @@ export function MultipleSelectChip() {
   );
 }
 
-export default function FormPropsTextFields() {
+export default function FormPropsTextFields(props) {
+  const handleClose = {props}
   const categoryId = useSelector((state) => state.categoryId)
   const [fileImage, setFileimage] = useState()
   const [newProduct, setNewproduct] = React.useState({

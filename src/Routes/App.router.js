@@ -9,13 +9,11 @@ import FinallBuy from '../pages/FinallBuy';
 import Payment from '../pages/Payment';
 import PanelAdmin from '../pages/PanelAdmin';
 import Product from '../pages/Product';
-import Inventory from '../pages/Inventory'
+import Inventorys from '../pages/Inventorys'
 import Orders from '../pages/Orders'
 import Notfound from '../pages/Notfound'
 import Protected from './Protected.route';
-import WaitingOrder from '../Components/WaitingOrder';
 import Resived from '../pages/Resived';
-import OutletOrder from '../pages/OutletOrder';
 
 import Pagination from '../pages/Pagination'
 
@@ -38,7 +36,7 @@ export default function AppRouter() {
         <Route path='/paneladmin/payment' element={<Protected element={<Payment />} />} />
         <Route path='/paneladmin/orders' element={<Protected element={<Orders />} />} />
         <Route path='/paneladmin/orders/resived' element={<Protected element={<Resived />} />} />
-        <Route path='/paneladmin/inventory' element={<Protected element={<Inventory />} />} />
+        <Route path='/paneladmin/inventory' element={<Protected element={<Inventorys />} />} />
 
 
 
