@@ -26,7 +26,7 @@ function Home() {
     }
   }
   return (
-    <Box >
+    <Box style={{marginButtom:'10px'}}>
       {/* <Carausell/> */}
       {category == null ? <Navigate to='/' /> :
         category.map((item, i) => (
@@ -35,7 +35,7 @@ function Home() {
               <TitleStyle variant="h4">{item.name}</TitleStyle>
             </Linkstyle>
             <Box  style={{textAlign:'center'}}>
-            <Main idCategory={item.id} key={item.id} sx={{ color: 'red' }} />
+            <Main idCategory={item.id} key={item.id}  />
               </Box>
             </>
         ))

@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../Components/Header'
+import Footer from '../Components/Footer'
 import Sidebar from '../Components/Sidebar'
 
 function WithUser(Component) {
@@ -13,6 +14,7 @@ function WithUser(Component) {
                     {pathCurrent.pathname === pathCategory ? <Sidebar /> : null}
                 </div>
                 <Component {...props} />
+                <Footer/>
             </>
         )
     }
