@@ -1,5 +1,6 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
+import PersonIcon from '@mui/icons-material/Person';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -8,17 +9,17 @@ import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import MenuItem from '@mui/material/MenuItem';
-import { BiCart, BiMenu } from "react-icons/bi";
+import { BiMenu } from "react-icons/bi";
 import logo from '../Assest/Images/logo.png'
 import { Link } from 'react-router-dom';
-import {Appbar} from '../Assest/Style/abstracts/Stylecomponent'
+import { Appbar, LinkHeaderStyle, AvatarStyle, LogoStyle, LinkResponsiveStyle } from '../Assest/Style/abstracts/Stylecomponent'
 
 
 
 const pages = ['مدیریت', 'سبدخرید'];
 
 const ResponsiveAppBar = () => {
-  
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -35,11 +36,10 @@ const ResponsiveAppBar = () => {
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex' } }}>
             <Box
-              sx={{ my: 2, color: 'white', display: 'block' }}
+              sx={{ my: 2, color: 'white', display: 'flex' }}
             >
-              <Link to='/paneladmin/orders' style={{ paddingLeft: 13 }} >{pages[0]}</Link>
-              <Link to='/cart' style={{ paddingLeft: 13 }} ><BiCart />{pages[1]}</Link>
-
+              <LinkHeaderStyle to='/paneladmin/orders' style={{ marginTop: '11px' }} ><PersonIcon style={{ marginTop: '2px' }} /><p style={{ marginTop: '7px' }}>{pages[0]}</p></LinkHeaderStyle>
+              <LinkHeaderStyle to='/cart' style={{ paddingTop: '2px' }} ><ShoppingCartIcon style={{ marginTop: '10px' }} /><p>{pages[1]}</p></LinkHeaderStyle>
             </Box>
 
           </Box>
@@ -73,21 +73,20 @@ const ResponsiveAppBar = () => {
                 display: { xs: 'block', sm: 'none', md: 'none' },
               }}
             >
-              <MenuItem onClick={handleCloseNavMenu} style={{display:'block'}}>
+              <MenuItem onClick={handleCloseNavMenu} style={{ display: 'block' }}>
                 <Typography textAlign="center"  >
-                  <Link to='/login'  >{pages[0]}</Link>
+                  <LinkResponsiveStyle to='/login' style={{ textDecoration: 'none' }}  ><PersonIcon />{pages[0]}</LinkResponsiveStyle>
                 </Typography>
                 <Typography textAlign="center" >
-                  <Link to='/cart'  ><BiCart />{pages[1]}</Link>
+                  <LinkResponsiveStyle to='/cart' style={{ textDecoration: 'none' }} mt={3} ><ShoppingCartIcon />{pages[1]}</LinkResponsiveStyle>
                 </Typography>
-
               </MenuItem>
             </Menu>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
-            <Box display={'flex'} >
-              <Typography variant="h6" style={{ paddingRight: 13 }} sx={{ display: { xs: 'none', sm: 'block' } }}>دمنوش کده</Typography>
-              <Link to="/"><Avatar className="logo" alt="logo" title="صفحه اصلی" src={logo} /></Link>
+            <Box display={'flex'} style={{ marginTop: '-13px' }} >
+              <Link to='/'> <LogoStyle variant="h6" sx={{ display: { xs: 'none', sm: 'block' } }}>دمنوش کده</LogoStyle></Link>
+              <AvatarStyle to="/"><Avatar className="logo" alt="logo" title="صفحه اصلی" src={logo} /></AvatarStyle>
             </Box>
             <Menu
               sx={{ mt: '45px' }}
@@ -106,8 +105,6 @@ const ResponsiveAppBar = () => {
             >
             </Menu>
           </Box>
-
-
         </Toolbar>
       </Container>
     </Appbar>

@@ -9,7 +9,7 @@ function WithAdmin(Component) {
             <>			
             <div><HeaderAdmin/></div>
 
-                <Component {...props} />
+                <Component {...props} /> 
                 <Footer/>
             </>
         )

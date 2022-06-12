@@ -10,7 +10,7 @@ function WithUser(Component) {
         return (
             <>
                 <div><Header /></div>
-                <div >
+                <div style={{paddingTop:' 64px'}} >
                     {pathCurrent.pathname === pathCategory ? <Sidebar /> : null}
                 </div>
                 <Component {...props} />

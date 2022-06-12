@@ -22,13 +22,51 @@ const Appbar = styled(AppBar)`
 	position: fixed !important;
 	z-index: 1 !important;
 	padding-top: -11px !important;
-	margin-top: -33px !important;
-	margin-bottom: 11px !important;
+	font-family: 'Iranian Sans', sans-serif !important;
+	padding-left: 13px;
+
+    a{
+        color:white;
+
+    }
+`
+export { Appbar }
+const LinkHeaderStyle = styled(Link)`
+padding-left: 25px;
+display:flex;
+`
+export { LinkHeaderStyle }
+const LinkResponsiveStyle = styled(Link)`
+font-family: 'Iranian Sans', sans-serif !important;
+padding-left: 25px;
+display:flex;
+margin-top:5px;
+`
+export { LinkResponsiveStyle }
+const LogoStyle = styled(Typography)`
+	font-family: 'Iranian Sans', sans-serif !important;
+	padding-left: 13px;
+	padding-top: 10px;
+
     a{
         color:white;
     }
 `
-export { Appbar }
+export { LogoStyle }
+
+const AvatarStyle = styled(Link)`
+
+div{
+	width: 63px !important;
+	height: 50px !important;
+}
+img{
+	width: 80% !important;
+	height: 81% !important;
+
+}
+`
+export { AvatarStyle }
 
 const Cardstyle = styled(Card)`
     margin:11px;
