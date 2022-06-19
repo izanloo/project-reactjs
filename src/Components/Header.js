@@ -12,7 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { BiMenu } from "react-icons/bi";
 import logo from '../Assest/Images/logo.png'
 import { Link } from 'react-router-dom';
-import { Appbar, LinkHeaderStyle, AvatarStyle, LogoStyle, LinkResponsiveStyle } from '../Assest/Style/abstracts/Stylecomponent'
+import { Appbar, LinkHeaderStyle, AvatarStyle, LogoStyle, LinkResponsiveStyle,NeonStyle } from '../Assest/Style/abstracts/Stylecomponent'
 
 
 
@@ -85,7 +85,7 @@ const ResponsiveAppBar = () => {
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Box display={'flex'} style={{ marginTop: '-13px' }} >
-              <Link to='/'> <LogoStyle variant="h6" sx={{ display: { xs: 'none', sm: 'block' } }}>دمنوش کده</LogoStyle></Link>
+              <NeonStyle to='/'> <LogoStyle variant="h6" sx={{ display: { xs: 'none', sm: 'block' } }}>دمنوش کده</LogoStyle></NeonStyle>
               <AvatarStyle to="/"><Avatar className="logo" alt="logo" title="صفحه اصلی" src={logo} /></AvatarStyle>
             </Box>
             <Menu

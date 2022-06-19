@@ -24,11 +24,11 @@ export default function Cards(props) {
           />
               </Link>
 
-          <CardContent>
+          <CardContent sx={{height:'120px'}}>
             <Typography gutterBottom variant="h5" component="div">
               {item.name}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" color="text.secondary" sx={{position: 'absolute' , bottom: '16px'}}>
               قیمت : {item.price}
             </Typography>
           </CardContent>

@@ -803,6 +803,7 @@ a {
 	.footer-logo {
 		margin-top: 33px;
 	}
+
   }
   @media (min-width:480px) and (max-width:599px)  { /* smartphones, Android phones, landscape iPhone */
 	.footer-content {
@@ -814,6 +815,7 @@ a {
 
 	  
 	}
+	
 	.footer-logo {
 		margin-top: 33px;
 	}
@@ -836,7 +838,10 @@ a {
   @media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */
   
   }
-  @media (min-width:1281px) { /* hi-res laptops and desktops */
+  @media (max-width:750px) { 
+	.us{
+		padding-left: 37px;
+	}
   
   }
   
@@ -896,7 +901,7 @@ const CarouselStyle = styled('div')`
 	}
 @media (min-width:320px) and (max-width:479px)  { 
 	img{
-		height:42vh;
+		height:28vh;
 	}
 	h3{
 		bottom: 34px;
@@ -915,8 +920,33 @@ const CarouselStyle = styled('div')`
 }
 @media (min-width:800px) { 
 	img{
-		height:83vh;
+		height:90vh;
 	}
 }
 `
 export { CarouselStyle }
+
+const NeonStyle = styled(Link)`
+    h6{
+		animation: neon 3s infinite;
+	}
+	@keyframes neon{
+		0%, 39%, 41%, 59%, 61%, 100%{
+			text-shadow:
+			white 0 0 12px,
+			#b3d414 0 0 24px,
+			#b3d414 0 0 36px;
+		}
+		40%,60%{
+			text-shadow:none;
+		}
+	}
+`
+export { NeonStyle }
+
+const HomeStyle = styled(Box)`
+
+text-align:center !important;
+text-align: -moz-center !important;
+`
+export { HomeStyle }
