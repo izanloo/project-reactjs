@@ -26,8 +26,8 @@ function Home() {
     }
   }
   return (
-    <Box style={{marginButtom:'10px'}}>
-      {/* <Carausell/> */}
+    <Box style={{marginButtom:'10px'}}> 
+       <Carausell /> 
       {category == null ? <Navigate to='/' /> :
         category.map((item, i) => (
           <>

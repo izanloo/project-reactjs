@@ -243,22 +243,7 @@ export { ModalStyle }
 
 
 
-const CarouselStyle = styled(Box)`
-div{
-    
-  height: 20pc;
-  width: 100%;
-  border-radius: 10px;
-  background-size: cover;
-  .img1{
-    background: url("https://i.pinimg.com/originals/b6/88/45/b68845a212688ba060337267ba240746.jpg");
 
-  }
-}
-  
-  
-`
-export { CarouselStyle }
 
 const TitleStyle = styled(Typography)`
 margin-right: 41px !important;
@@ -884,3 +869,54 @@ a {
   
 	`
 export { FooterStyle }
+const CarouselStyle = styled('div')`
+    position:relative;
+	h3{
+		position: absolute;
+		right: 8px;
+		bottom: 68px;
+		color: white;
+	}
+    span{
+		bottom: 12px;
+		position: absolute;
+		right: 0px;
+		display: inline-block;
+	}
+	button{
+		border: none;
+		background: #004658;
+		color: white;
+		fontSize: 22px;
+		padding: 5px 10px;
+		borderRadius: 10px;
+		margin: 0 10px;
+		border-radius: 19px;
+		cursor: pointer;
+	}
+@media (min-width:320px) and (max-width:479px)  { 
+	img{
+		height:42vh;
+	}
+	h3{
+		bottom: 34px;
+		font-size: 12px;
+	}
+}
+@media (min-width:480px) and (max-width:599px)  { 
+	img{
+		height:48vh;
+	}
+}
+@media (min-width:600px) and (max-width: 800px)  { 
+	img{
+		height:60vh;
+	}
+}
+@media (min-width:800px) { 
+	img{
+		height:83vh;
+	}
+}
+`
+export { CarouselStyle }
