@@ -20,27 +20,14 @@ export default function Footer() {
             <Box>
               <img src={link} class="footer-logo" alt="دمنوش گیاهی لوگو" />
             </Box>
-            <Box class="footer-menu">
-              <Typography class="footer-menu-name" variant="h2">دسترسی سریع</Typography>
-              <ul id="menu-quick-links" class="footer-menu-list">
-                <li class="menu-item menu-item-type-custom menu-item-object-custom">
-                  <Link to='/' target="_blank" rel="noopener noreferrer">صفحه اصلی</Link>
-                </li>
-                <li class="menu-item menu-item-type-custom menu-item-object-custom">
-                  <Link to='/' target="_blank" rel="noopener noreferrer">مدیریت</Link>
-                </li>
-                <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                  <Link to='/'>سبدخرید</Link>
-                </li>
-                <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                  <Link to='/'>ورود کاربر</Link>
-                </li>
-                <li class="menu-item menu-item-type-post_type_archive menu-item-object-customer">
-                  <Link to='/'> عضویت</Link></li>
+            <Box style={{display: 'grid' , marginTop: '23px',lineHeight: '1.78'}}>
 
-              </ul>
-            </Box>
+            <Link to='/'>صفحه اصلی</Link>
+            <Link to='/' >عضویت</Link>
+            <Link to='/' >ورود</Link>
+            <Link to='/'>درباره ما</Link>
           </Box>
+            </Box>
           <Box class="footer-content-column">
             <Box>
               <img src={call} class="footer-logo" alt="دمنوش گیاهی تماس با ما" />

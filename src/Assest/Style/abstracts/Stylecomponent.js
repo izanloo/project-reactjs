@@ -705,7 +705,7 @@ a {
 	  height: 26px;
 	  left: 3px;
 	  top: 11px;
-	  width: 48px;
+	  width: 27px;
   }
   
   .footer-social-link {
@@ -741,22 +741,22 @@ a {
 	  height: 28px;
 	  left: 62px;
 	  top: 3px;
-	  width: 51px;
-  }
+	  width: 31px;
+	  }
   
   .footer-social-link.youtube {
 	  height: 24px;
 	  left: 123px;
 	  top: 12px;
-	  width: 46px;
-  }
+	  width: 26px;
+	  }
   
   .footer-social-link.github {
 	  height: 34px;
 	  left: 172px;
 	  top: 7px;
-	  width: 55px;
-  }
+	  width: 36px;
+	  }
   
   .footer-copyright {
 	  background-color: #027b9a;
