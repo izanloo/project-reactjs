@@ -3,7 +3,6 @@ import { Box, Grid, Button, Typography, Modal } from "@mui/material";
 import TableOrderModal from "./TableModal.js";
 import {gatAllProduct} from "../../services/Config";
 import { ToastContainer, toast } from "react-toastify";
-// import UpdateOneOrder from '../UpdateOneOrder'
 import {api} from '../../services/Config'
 import { ACCESS_TOKEN } from "../../services/Config";
 import { convertTimeStampToDate } from "../convetTime";

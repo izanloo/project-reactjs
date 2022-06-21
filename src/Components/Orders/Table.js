@@ -15,7 +15,6 @@ import ModalOrder from "./Modal";
 function TablePaginationActions(props) {
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
-
   const handleFirstPageButtonClick = (event) => {
     onPageChange(event, 0);
   };
@@ -106,8 +105,8 @@ export default function CustomPaginationActionsTable(props) {
     >
       <Table aria-label="custom pagination table">
         <TableBody sx={{ direction: "rtl" }}>
-          <TableRow key={1} sx={{ textAlign: "center" }}>
-            <TableCell  >
+          <TableRow key={1}>
+            <TableCell  sx={{ textAlign: "center" }}  >
               نام و نام خانوادگی
             </TableCell>
             <TableCell component="th" scope="row"   > مجموع مبلغ</TableCell>
@@ -122,7 +121,7 @@ export default function CustomPaginationActionsTable(props) {
             : rows
           ).map((row) => (
             <TableRow key={row.name}>
-              <TableCell>
+              <TableCell  sx={{ textAlign: "center" }}s>
                 <span style={{ marginLeft: '5px' }}>{row.customerDetail.firstName}</span> {row.customerDetail.lastName}
               </TableCell>
               <TableCell component="th" scope="row" >
