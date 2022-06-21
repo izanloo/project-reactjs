@@ -13,7 +13,6 @@ import Inventorys from '../pages/Inventorys'
 import Orders from '../pages/Orders'
 import Notfound from '../pages/Notfound'
 import Protected from './Protected.route';
-import Resived from '../pages/Resived';
 
 import Pagination from '../pages/Pagination'
 
@@ -35,7 +34,6 @@ export default function AppRouter() {
         <Route path='/paneladmin/product' element={<Protected element={<Product />} />} />
         <Route path='/paneladmin/payment' element={<Protected element={<Payment />} />} />
         <Route path='/paneladmin/orders' element={<Protected element={<Orders />} />} />
-        <Route path='/paneladmin/orders/resived' element={<Protected element={<Resived />} />} />
         <Route path='/paneladmin/inventory' element={<Protected element={<Inventorys />} />} />
 
 

@@ -950,3 +950,15 @@ text-align:center !important;
 text-align: -moz-center !important;
 `
 export { HomeStyle }
+
+const MOdalOrderStyle = styled(Box)`
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 50%;
+	background-color: white;
+	boxShadow: 24px;
+	padding: 40px;
+`
+export { MOdalOrderStyle }

@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { Formik } from 'formik';
-import { useNavigate, useLocation} from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import { login } from '../Redux/LoginSlice'
 import { Loginstyle } from '../Assest/Style/abstracts/Stylecomponent';
 import axios from 'axios'
 import { Box } from '@mui/material';
-import { useSelector,useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
+import { toast } from "react-toastify";
 
 
 function Login() {
@@ -14,11 +15,8 @@ function Login() {
   const navigate = useNavigate()
   const location = useLocation()
   const state = useSelector((state) => state.admin.isLogin)
-  const ACCESS_TOKEN="";
+  const ACCESS_TOKEN = "";
   const redirectaddress = location.state?.from.pathname || '/paneladmin/orders'
-
-
-   
   const [errorlogin, setErorr] = useState({
     usernameErr: '',
     passwordErr: ''
@@ -27,7 +25,7 @@ function Login() {
   return (
     <Loginstyle>
       <Formik
-        initialValues={{username: '', password: '', }}
+        initialValues={{ username: '', password: '', }}
         validate={values => {
           let errors = {};
           if (!values.username) {
@@ -41,26 +39,25 @@ function Login() {
           }
           return errors;
         }}
-   
+
         onSubmit={values => {
           axios
-          .post('http://localhost:3002/auth/login',values)
-    .then((res) => {
-      if (res.status == 200) {
-        Dispatch( login(true))
-
-       localStorage.setItem("token",res.data.token)
-       localStorage.setItem("isLogin",true)
-        navigate(redirectaddress,{replace:true})
-      }
-    })
-    .catch(() => {
-      alert("نام کاربری و یا رمز عبور اشتباه است");
-    });
+            .post('http://localhost:3002/auth/login', values) 
+            .then((res) => {
+              if (res.status === 200 || res.status === 201) {
+                toast.success("خوش اومدی ادمین عزیز");
+                Dispatch(login(true))
+                localStorage.setItem("ACCESS_TOKEN", res.data.token)
+                localStorage.setItem("isLogin", true)
+                navigate(redirectaddress, { replace: true })
+              }
+            })
+            .catch((err) =>
+              toast.error("نام کاربری یا رمز عبور اشتباه است"))
         }}
       >
         {props => (
-          <Box sx={{ pt: '120px', maxWidth: { xs: '100%' } }}>
+          <Box sx={{ pt: '120px', maxWidth: { xs: '100%' }, paddingLeft: '19px', paddingRight: '19px' }}>
             <form onSubmit={props.handleSubmit} >
               <div className="field">
                 <input
