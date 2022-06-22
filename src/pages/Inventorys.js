@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { api } from "../services/Config";
 import { toast } from "react-toastify";
 import EasyEdit, { Types } from 'react-easy-edit';
-import TableInventory from "../Components/Admin/TableInventory";
+import Tablee from "../Components/Admin/Tablee";
 import WithAdmin from "../Layouts/WithAdmin";
 
 const columns = [
@@ -63,7 +63,7 @@ const Inventory = () => {
   return (
     <div>
       <h4 style={{ paddingRight: '5px' }}>مدیریت موجودی و قیمت ها</h4>
-      <TableInventory columns={columns} rows={rows} />
+      <Tablee columns={columns} rows={rows} />
     </div>
   );
 }

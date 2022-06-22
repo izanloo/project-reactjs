@@ -1,34 +1,47 @@
 import React, { useState,useEffect } from 'react'
-import WithUser from '../Layouts/WithUser'
 import Button from "@mui/material/Button";
 import axios from 'axios'
 import { Navigate } from 'react-router-dom'
 import { ArrowBack } from '@mui/icons-material';
 import { Link } from '@mui/material';
-import CancelPayment from './CancelPayment';
+// import CancelPayment from './CancelPayment';
 import { useNavigate, useSearchParams } from "react-router-dom";
-import PaymentSuccess from '../Components/PaymentSuccess';
+import WithUser from '../Layouts/WithUser'
+import PaymentSuccess from '../Components/User/Payment/PaymentSuccess';
+import PaymentCancel from '../Components/User/Payment/PaymentCancel';
+import { api } from '../services/Config'
 
 
 
 function Payment() {
   const [post, setPost] = useState(false)
+  const dateNumber = +new Date()
+//   function updateCount(){
+//     try {
+//       await HttpService.patch(PRODUCTS+`/${productId}`,{count: updatedMaxCount})
+//   } catch (error) {
+//       toast.error('خطایی در بروز رسانی موجودی محصول ایجاد شده است')
+//   }
+// }
+const handel = async () => {
+  await api.put(`http://localhost:3002/products/"id"==7`,{count:500})
+  .then(res =>console.log(res.data))
+  .catch(error => console.log(error))
+}
+
+  
   function successPayment() {
-    // const current = new Date();
-    // const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
+    
+
     const LocalStorage = JSON.parse(localStorage.getItem("customer"));
     const LocalCart = JSON.parse(localStorage.getItem("cart"));
+    const LocalpurchaseTotal = JSON.parse(localStorage.getItem("purchaseTotal"));
+    
     let customerDetail = {
       'firstName': LocalStorage[0].firstName,
       'lastName': LocalStorage[0].lastName,
       'Address': LocalStorage[0].billingAddress,
       'phone': LocalStorage[0].phone,
-
-      //تاریخ سفارش
-      // 'orderDate' : date,
-      // 'purchaseTotal':220000,
-      // "orderStatus": 1,
-      //تاریخ تحویل   
     }
 
     let orderItems = LocalCart
@@ -43,9 +56,8 @@ function Payment() {
         orderItems,
         "orderStatus": 1,
         "delivery":LocalStorage[0].delivery,
-        "purchaseTotal": "200,000",
-        "orderDate": 1643396897495,
-
+        "purchaseTotal": LocalpurchaseTotal,
+        "orderDate": dateNumber,
       },
 
     })
@@ -65,16 +77,14 @@ function Payment() {
     if(statusPayment == 'success'){
       successPayment()
     }
-    if(statusPayment == 'fail'){
-      localStorage.removeItem("cart");    
-      localStorage.removeItem("customer");       }
+
   }
 useEffect(()=>{getStatus()},[])
   const [searchParams, setSearchParams] = useSearchParams();
 
   return (
     <>
-            {searchParams.get("status") == "success" ? <PaymentSuccess/> :"کنسل شد"}
+            {searchParams.get("status") == "success" ? <PaymentSuccess/> :<PaymentCancel/>}
     </>
   )
 }

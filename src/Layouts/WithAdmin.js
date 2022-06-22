@@ -7,7 +7,7 @@ function WithAdmin(Component) {
     return function adminLayout({...props}) {
         return (
             <>			
-            <div><HeaderAdmin/></div>
+            <div style={{paddingBottom:'111px'}}><HeaderAdmin/></div>
 
                 <Component {...props} /> 
                 <Footer/>

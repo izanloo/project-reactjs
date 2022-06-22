@@ -13,6 +13,10 @@ import Alert from '@mui/material/Alert';
 import { api } from '../services/Config'
 import DeleteIcon from '@mui/icons-material/Delete';
 
+  let cartPervios 
+  let fullPrice
+  let newList
+  let sum
 
 const useFakeMutation = () => {
   return React.useCallback(
@@ -162,7 +166,9 @@ function Cart() {
   }, [])
   const navigate = useNavigate()
   function handlePyment() {
-    return navigate('/finalbuy')
+    localStorage.setItem('purchaseTotal', JSON.stringify(sum));
+
+    return navigate('/finalbuy') 
   }
   let [arr, setArr] = useState([])
   let sum

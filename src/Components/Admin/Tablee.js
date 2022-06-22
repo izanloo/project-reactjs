@@ -8,7 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
-export default function TableInventory({rows,columns}) {
+export default function Tablee({rows,columns}) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(4);
   const handleChangePage = (event, newPage) => {
