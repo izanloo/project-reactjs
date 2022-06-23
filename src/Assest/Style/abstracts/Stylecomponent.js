@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import AppBar from '@mui/material/AppBar';
 import Card from '@mui/material/Card';
-import { Box } from '@mui/material';
+import { Box ,Grid} from '@mui/material';
 import Typography from '@mui/material/Typography';
 
 
@@ -723,3 +723,9 @@ padding: 24px;
 line-height: 29px;
 `
 export { DescriptionStyle }
+
+
+const DateStyle = styled(Grid)`
+
+`
+export { DateStyle }
